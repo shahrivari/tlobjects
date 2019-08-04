@@ -18,8 +18,8 @@ public class TLReqResLog extends TLObject {
 
     protected long authKeyId;
     protected int userId;
-    protected int requestTime;
-    protected int responseTime;
+    protected long requestTime;
+    protected long responseTime;
     protected TLObject request;
     protected TLObject response;
     protected TLObject updates;
@@ -29,7 +29,7 @@ public class TLReqResLog extends TLObject {
     public TLReqResLog() {
     }
 
-    public TLReqResLog(long authKeyId, int userId, int requestTime, int responseTime, TLObject request, TLObject response, TLObject updates) {
+    public TLReqResLog(long authKeyId, int userId, long requestTime, long responseTime, TLObject request, TLObject response, TLObject updates) {
         this.authKeyId = authKeyId;
         this.userId = userId;
         this.requestTime = requestTime;
@@ -43,8 +43,8 @@ public class TLReqResLog extends TLObject {
     public void serializeBody(OutputStream stream) throws IOException {
         writeLong(authKeyId, stream);
         writeInt(userId, stream);
-        writeInt(requestTime, stream);
-        writeInt(responseTime, stream);
+        writeLong(requestTime, stream);
+        writeLong(responseTime, stream);
         writeTLObject(request, stream);
         writeTLObject(response, stream);
         writeTLObject(updates, stream);
@@ -55,8 +55,8 @@ public class TLReqResLog extends TLObject {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         authKeyId = readLong(stream);
         userId = readInt(stream);
-        requestTime = readInt(stream);
-        responseTime = readInt(stream);
+        requestTime = readLong(stream);
+        responseTime = readLong(stream);
         request = readTLObject(stream, context);
         response = readTLObject(stream, context);
         updates = readTLObject(stream, context);
@@ -66,8 +66,8 @@ public class TLReqResLog extends TLObject {
     public int computeSerializedSize() {
         int size = SIZE_CONSTRUCTOR_ID;
         size += SIZE_INT64;
-        size += SIZE_INT32;
-        size += SIZE_INT32;
+        size += SIZE_INT64;
+        size += SIZE_INT64;
         size += SIZE_INT32;
         size += request.computeSerializedSize();
         size += response.computeSerializedSize();
@@ -102,19 +102,19 @@ public class TLReqResLog extends TLObject {
         this.userId = userId;
     }
 
-    public int getRequestTime() {
+    public long getRequestTime() {
         return requestTime;
     }
 
-    public void setRequestTime(int requestTime) {
+    public void setRequestTime(long requestTime) {
         this.requestTime = requestTime;
     }
 
-    public int getResponseTime() {
+    public long getResponseTime() {
         return responseTime;
     }
 
-    public void setResponseTime(int responseTime) {
+    public void setResponseTime(long responseTime) {
         this.responseTime = responseTime;
     }
 

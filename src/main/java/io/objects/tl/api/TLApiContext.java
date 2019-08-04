@@ -942,6 +942,9 @@ public class TLApiContext extends TLContext {
         registerClass(TLRequestMessagesGetWebPagePreview.CONSTRUCTOR_ID, TLRequestMessagesGetWebPagePreview.class);
         registerClass(TLRequestAccountSendChangePhoneCode.CONSTRUCTOR_ID, TLRequestAccountSendChangePhoneCode.class);
         registerClass(TLReqResLog.CONSTRUCTOR_ID, TLReqResLog.class);
+        registerClass(TLChannelUpdate.CONSTRUCTOR_ID, TLChannelUpdate.class);
+        registerClass(TLSessionId.CONSTRUCTOR_ID, TLSessionId.class);
+        registerClass(TLUserUpdate.CONSTRUCTOR_ID, TLUserUpdate.class);
 
     }
 }
