@@ -6,14 +6,19 @@
 
     <groupId>io.objects</groupId>
     <artifactId>tl</artifactId>
-    <version>1.0</version>
+    <version>1.21</version>
 
     <properties>
         <junit.jupiter.version>5.4.2</junit.jupiter.version>
     </properties>
 
-
     <dependencies>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+
         <!-- TEST -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
