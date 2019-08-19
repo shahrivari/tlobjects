@@ -22,6 +22,9 @@ public class TLChannelUpdate extends TLPeerUpdate {
     protected TLIntVector peersToExcept;
     protected TLIntVector deltaEncodedParticipants;
 
+    public TLChannelUpdate() {
+    }
+
     public TLChannelUpdate(TLAbsUpdates updates, int channelId, TLIntVector peers, TLIntVector peersToExcept, TLIntVector deltaEncodedParticipants) {
         this.updates = updates;
         this.channelId = channelId;
