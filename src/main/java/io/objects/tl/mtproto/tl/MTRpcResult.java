@@ -11,7 +11,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.*;
 
 public class MTRpcResult extends TLObject {
-    public static int CONSTRUCTOR_ID = -212046591;
+    public static int CONSTRUCTOR_ID = 0xf35c6d01;
 
     private long messageId;
 
