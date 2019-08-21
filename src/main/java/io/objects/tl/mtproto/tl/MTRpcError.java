@@ -13,7 +13,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.*;
 
 public class MTRpcError extends TLObject {
-    public static int CONSTRUCTOR_ID = 558156313;
+    public static int CONSTRUCTOR_ID = 0x2144ca19;
 
     private static Pattern REGEXP_PATTERN = Pattern.compile("[A-Z_0-9]+");
 
