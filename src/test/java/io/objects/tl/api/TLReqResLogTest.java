@@ -2,10 +2,14 @@ package io.objects.tl.api;
 
 import io.objects.tl.TLObjectUtils;
 import io.objects.tl.api.request.TLRequestChannelsCreateChannel;
-import io.objects.tl.core.TLVector;
+import io.objects.tl.core.TLObject;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -40,7 +44,6 @@ class TLReqResLogTest {
         log.setRequest(request);
 
         log.setResponse(new TLUpdateChannel());
-        log.setUpdates(new TLUpdates(new TLVector(), new TLVector(), new TLVector(), 0, 5));
 
         byte[] bytes = log.serialize();
         TLReqResLog deserialize = TLObjectUtils.deserialize(bytes);
@@ -48,5 +51,20 @@ class TLReqResLogTest {
         assertThat(log.authKeyId).isEqualTo(deserialize.authKeyId);
         assertThat(log.userId).isEqualTo(deserialize.userId);
         assertThat(log.requestTime).isEqualTo(deserialize.requestTime);
+    }
+
+
+    @Disabled
+    @Test
+    void bib() throws IOException {
+        for (int i = 1; i < 100; i++) {
+            byte[] bytes = Files.readAllBytes(Paths.get("/home/che/Desktop/logs/log" + i + ".log"));
+            try {
+                TLObject deserialize = TLObjectUtils.deserialize(bytes);
+                System.out.println(deserialize.getClass().getName());
+            } catch (Exception e){
+                TLObject deserialize = TLObjectUtils.deserialize(bytes);
+            }
+        }
     }
 }
