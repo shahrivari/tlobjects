@@ -26,7 +26,7 @@ public class TLReqResLog extends TLObject {
     public TLReqResLog() {
     }
 
-    public TLReqResLog(long authKeyId, int userId, long requestTime, long responseTime, TLObject request, TLObject response, TLObject updates) {
+    public TLReqResLog(long authKeyId, int userId, long requestTime, long responseTime, TLObject request, TLObject response) {
         this.authKeyId = authKeyId;
         this.userId = userId;
         this.requestTime = requestTime;

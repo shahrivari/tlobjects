@@ -1,0 +1,4 @@
+Changes for layer 86
+line 4650:  Originally was static but changed to avoid Java keyword
+line 2333:  Originally was Bool but seems to be wrong
+line 2337:  Originally was Bool but seems to be wrong
