@@ -1,0 +1,17 @@
+TLRequestMessagesGetHistoryV71
+messages.getHistory#afa92846 peer:InputPeer offset_id:int offset_date:int add_offset:int limit:int max_id:int min_id:int = messages.Messages;
+
+TLFileLocationV71
+fileLocation#53d69076 dc_id:int volume_id:long local_id:int secret:long = FileLocation;
+
+TLDocumentV71
+document#87232bc7 id:long access_hash:long date:int mime_type:string size:int thumb:PhotoSize dc_id:int version:int attributes:Vector<DocumentAttribute> = Document;
+
+TLRequestAccountRegisterDeviceV71
+account.registerDevice#637ea878 token_type:int token:string = Bool;
+
+TLInputFileLocationV71
+inputFileLocation#14637196 volume_id:long local_id:int secret:long = InputFileLocation;
+
+TLPhotoV71
+photo#9288dd29 flags:# has_stickers:flags.0?true id:long access_hash:long date:int sizes:Vector<PhotoSize> = Photo;
