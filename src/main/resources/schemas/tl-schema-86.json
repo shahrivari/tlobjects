@@ -11990,6 +11990,63 @@
       ],
       "type": "BotUserProfilePhoto",
       "predicate": "botUserProfilePhotoEmpty"
+    },
+    {
+      "id": "-2087575608",
+      "params": [
+        {
+          "name": "updates",
+          "type": "Updates"
+        },
+        {
+          "name": "channelId",
+          "type": "int"
+        },
+        {
+          "name": "peers",
+          "type": "Vector<int>"
+        },
+        {
+          "name": "peersToExcept",
+          "type": "Vector<int>"
+        },
+        {
+          "name": "deltaEncodedParticipants",
+          "type": "Vector<int>"
+        }
+      ],
+      "type": "PeerUpdate",
+      "predicate": "peerUpdateChannel"
+    },
+    {
+      "id": "-2095603768",
+      "params": [
+        {
+          "name": "updates",
+          "type": "Updates"
+        },
+        {
+          "name": "usrId",
+          "type": "int"
+        },
+        {
+          "name": "exceptSessions",
+          "type": "Vector<SessionId>"
+        }
+      ],
+      "type": "PeerUpdate",
+      "predicate": "peerUpdateUser"
+    },
+    {
+      "id": "-2078810424",
+      "params": [
+        {
+          "name": "bytes",
+          "type": "bytes"
+        }
+      ],
+      "type": "SessionId",
+      "predicate": "sessionId"
     }
   ],
   "methods": [
