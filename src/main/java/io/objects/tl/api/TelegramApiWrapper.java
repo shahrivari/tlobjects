@@ -59,6 +59,7 @@ import io.objects.tl.api.messages.TLHighScores;
 import io.objects.tl.api.messages.TLMessageEditData;
 import io.objects.tl.api.messages.TLPeerDialogs;
 import io.objects.tl.api.messages.TLStickerSet;
+import io.objects.tl.api.monobot.TLBotFile;
 import io.objects.tl.api.payments.TLAbsPaymentResult;
 import io.objects.tl.api.payments.TLPaymentForm;
 import io.objects.tl.api.payments.TLPaymentReceipt;
@@ -88,6 +89,7 @@ import io.objects.tl.api.request.TLRequestAccountGetWallPapers;
 import io.objects.tl.api.request.TLRequestAccountGetWebAuthorizations;
 import io.objects.tl.api.request.TLRequestAccountInitTakeoutSession;
 import io.objects.tl.api.request.TLRequestAccountRegisterDevice;
+import io.objects.tl.api.request.TLRequestAccountRegisterDeviceV71;
 import io.objects.tl.api.request.TLRequestAccountReportPeer;
 import io.objects.tl.api.request.TLRequestAccountResetAuthorization;
 import io.objects.tl.api.request.TLRequestAccountResetNotifySettings;
@@ -126,6 +128,7 @@ import io.objects.tl.api.request.TLRequestAuthSignIn;
 import io.objects.tl.api.request.TLRequestAuthSignUp;
 import io.objects.tl.api.request.TLRequestBotsAnswerWebhookJSONQuery;
 import io.objects.tl.api.request.TLRequestBotsSendCustomRequest;
+import io.objects.tl.api.request.TLRequestChannelGetMessagesV71;
 import io.objects.tl.api.request.TLRequestChannelsCheckUsername;
 import io.objects.tl.api.request.TLRequestChannelsCreateChannel;
 import io.objects.tl.api.request.TLRequestChannelsDeleteChannel;
@@ -176,6 +179,7 @@ import io.objects.tl.api.request.TLRequestContactsResolveUsername;
 import io.objects.tl.api.request.TLRequestContactsSearch;
 import io.objects.tl.api.request.TLRequestContactsToggleTopPeers;
 import io.objects.tl.api.request.TLRequestContactsUnblock;
+import io.objects.tl.api.request.TLRequestGetLanguages;
 import io.objects.tl.api.request.TLRequestHelpAcceptTermsOfService;
 import io.objects.tl.api.request.TLRequestHelpGetAppChangelog;
 import io.objects.tl.api.request.TLRequestHelpGetAppUpdate;
@@ -237,11 +241,13 @@ import io.objects.tl.api.request.TLRequestMessagesGetFeaturedStickers;
 import io.objects.tl.api.request.TLRequestMessagesGetFullChat;
 import io.objects.tl.api.request.TLRequestMessagesGetGameHighScores;
 import io.objects.tl.api.request.TLRequestMessagesGetHistory;
+import io.objects.tl.api.request.TLRequestMessagesGetHistoryV71;
 import io.objects.tl.api.request.TLRequestMessagesGetInlineBotResults;
 import io.objects.tl.api.request.TLRequestMessagesGetInlineGameHighScores;
 import io.objects.tl.api.request.TLRequestMessagesGetMaskStickers;
 import io.objects.tl.api.request.TLRequestMessagesGetMessageEditData;
 import io.objects.tl.api.request.TLRequestMessagesGetMessages;
+import io.objects.tl.api.request.TLRequestMessagesGetMessagesV71;
 import io.objects.tl.api.request.TLRequestMessagesGetMessagesViews;
 import io.objects.tl.api.request.TLRequestMessagesGetPeerDialogs;
 import io.objects.tl.api.request.TLRequestMessagesGetPeerSettings;
@@ -302,6 +308,17 @@ import io.objects.tl.api.request.TLRequestMessagesToggleDialogPin;
 import io.objects.tl.api.request.TLRequestMessagesUninstallStickerSet;
 import io.objects.tl.api.request.TLRequestMessagesUploadEncryptedFile;
 import io.objects.tl.api.request.TLRequestMessagesUploadMedia;
+import io.objects.tl.api.request.TLRequestMonobotBotUpdateProfilePhoto;
+import io.objects.tl.api.request.TLRequestMonobotDeleteAccount;
+import io.objects.tl.api.request.TLRequestMonobotEditInlineBotMessage;
+import io.objects.tl.api.request.TLRequestMonobotEditMessage;
+import io.objects.tl.api.request.TLRequestMonobotForwardMessages;
+import io.objects.tl.api.request.TLRequestMonobotMessagesSetTyping;
+import io.objects.tl.api.request.TLRequestMonobotSendMedia;
+import io.objects.tl.api.request.TLRequestMonobotSendMessage;
+import io.objects.tl.api.request.TLRequestMonobotSetBotCallbackAnswer;
+import io.objects.tl.api.request.TLRequestMonobotSignUp;
+import io.objects.tl.api.request.TLRequestMonobotUploadGetFile;
 import io.objects.tl.api.request.TLRequestPaymentsClearSavedInfo;
 import io.objects.tl.api.request.TLRequestPaymentsGetPaymentForm;
 import io.objects.tl.api.request.TLRequestPaymentsGetPaymentReceipt;
@@ -486,6 +503,12 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     public TLBool accountRegisterDevice(int tokenType, String token, boolean appSandbox,
             TLBytes secret, TLIntVector otherUids) throws RpcErrorException, IOException {
         return (TLBool) executeRpcQuery(new TLRequestAccountRegisterDevice(tokenType, token, appSandbox, secret, otherUids));
+    }
+
+    @Override
+    public TLBool accountRegisterDeviceV71(int tokenType, String token) throws RpcErrorException,
+            IOException {
+        return (TLBool) executeRpcQuery(new TLRequestAccountRegisterDeviceV71(tokenType, token));
     }
 
     @Override
@@ -997,6 +1020,11 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     }
 
     @Override
+    public TLLangPackLanguage getLanguages() throws RpcErrorException, IOException {
+        return (TLLangPackLanguage) executeRpcQuery(new TLRequestGetLanguages());
+    }
+
+    @Override
     public TLBool helpAcceptTermsOfService(TLDataJSON id) throws RpcErrorException, IOException {
         return (TLBool) executeRpcQuery(new TLRequestHelpAcceptTermsOfService(id));
     }
@@ -1388,6 +1416,12 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     }
 
     @Override
+    public TLAbsMessages messagesGetMessagesV71(TLIntVector id) throws RpcErrorException,
+            IOException {
+        return (TLAbsMessages) executeRpcQuery(new TLRequestMessagesGetMessagesV71(id));
+    }
+
+    @Override
     public TLIntVector messagesGetMessagesViews(TLAbsInputPeer peer, TLIntVector id,
             boolean increment) throws RpcErrorException, IOException {
         return (TLIntVector) executeRpcQuery(new TLRequestMessagesGetMessagesViews(peer, id, increment));
@@ -1751,6 +1785,85 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     public TLAbsMessageMedia messagesUploadMedia(TLAbsInputPeer peer, TLAbsInputMedia media) throws
             RpcErrorException, IOException {
         return (TLAbsMessageMedia) executeRpcQuery(new TLRequestMessagesUploadMedia(peer, media));
+    }
+
+    @Override
+    public TLAbsBotUserProfilePhoto monobotBotUpdateProfilePhoto(TLAbsInputPhoto id, long requestId,
+            int botId) throws RpcErrorException, IOException {
+        return (TLAbsBotUserProfilePhoto) executeRpcQuery(new TLRequestMonobotBotUpdateProfilePhoto(id, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotDeleteAccount(String reason, long requestId, int botId) throws
+            RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotDeleteAccount(reason, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotEditInlineBotMessage(boolean noWebpage, boolean stopGeoLive,
+            TLInputBotInlineMessageID id, String message, TLAbsInputMedia media,
+            TLAbsReplyMarkup replyMarkup, TLVector<TLAbsMessageEntity> entities,
+            TLAbsInputGeoPoint geoPoint, long requestId, int botId) throws RpcErrorException,
+            IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotEditInlineBotMessage(noWebpage, stopGeoLive, id, message, media, replyMarkup, entities, geoPoint, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotEditMessage(boolean noWebpage, boolean stopGeoLive,
+            TLAbsInputPeer peer, int id, String message, TLAbsInputMedia media,
+            TLAbsReplyMarkup replyMarkup, TLVector<TLAbsMessageEntity> entities,
+            TLAbsInputGeoPoint geoPoint, long requestId, int botId) throws RpcErrorException,
+            IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotEditMessage(noWebpage, stopGeoLive, peer, id, message, media, replyMarkup, entities, geoPoint, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotForwardMessages(boolean silent, boolean background,
+            boolean withMyScore, boolean grouped, TLAbsInputPeer fromPeer, TLIntVector id,
+            TLLongVector randomId, TLAbsInputPeer toPeer, long requestId, int botId) throws
+            RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotForwardMessages(silent, background, withMyScore, grouped, fromPeer, id, randomId, toPeer, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotMessagesSetTyping(TLAbsInputPeer peer, TLAbsSendMessageAction action,
+            long requestId, int botId) throws RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotMessagesSetTyping(peer, action, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotSendMedia(boolean silent, boolean background, boolean clearDraft,
+            TLAbsInputPeer peer, Integer replyToMsgId, TLAbsInputMedia media, String message,
+            long randomId, TLAbsReplyMarkup replyMarkup, TLVector<TLAbsMessageEntity> entities,
+            long requestId, int botId) throws RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSendMedia(silent, background, clearDraft, peer, replyToMsgId, media, message, randomId, replyMarkup, entities, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotSendMessage(boolean noWebpage, boolean silent, boolean background,
+            boolean clearDraft, TLAbsInputPeer peer, Integer replyToMsgId, String message,
+            long randomId, TLAbsReplyMarkup replyMarkup, TLVector<TLAbsMessageEntity> entities,
+            long requestId, int botId) throws RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSendMessage(noWebpage, silent, background, clearDraft, peer, replyToMsgId, message, randomId, replyMarkup, entities, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotSetBotCallbackAnswer(boolean alert, long queryId, String message,
+            String url, int cacheTime, long requestId, int botId) throws RpcErrorException,
+            IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSetBotCallbackAnswer(alert, queryId, message, url, cacheTime, requestId, botId));
+    }
+
+    @Override
+    public TLBotUpdates monobotSignUp(String botName, String userName, long requestId) throws
+            RpcErrorException, IOException {
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSignUp(botName, userName, requestId));
+    }
+
+    @Override
+    public TLBotFile monobotUploadGetFile(TLAbsInputFileLocation location, int offset, int limit,
+            long requestId, int botId) throws RpcErrorException, IOException {
+        return (TLBotFile) executeRpcQuery(new TLRequestMonobotUploadGetFile(location, offset, limit, requestId, botId));
     }
 
     @Override
