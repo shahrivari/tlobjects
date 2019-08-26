@@ -11940,6 +11940,56 @@
       ],
       "type": "monobot.BotPhotos",
       "predicate": "monobot.botPhotos"
+    },
+    {
+      "id": "-715500008",
+      "params": [
+        {
+          "name": "photo_id",
+          "type": "long"
+        },
+        {
+          "name": "photo_small",
+          "type": "FileLocation"
+        },
+        {
+          "name": "photo_big",
+          "type": "FileLocation"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "responseCode",
+          "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
+        }
+      ],
+      "type": "BotUserProfilePhoto",
+      "predicate": "botUserProfilePhoto"
+    },
+    {
+      "id": "1324444417",
+      "params": [
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "responseCode",
+          "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
+        }
+      ],
+      "type": "BotUserProfilePhoto",
+      "predicate": "botUserProfilePhotoEmpty"
     }
   ],
   "methods": [
@@ -16896,6 +16946,25 @@
       ],
       "type": "BotUpdates",
       "method": "monobot.sendMessage"
+    },
+    {
+      "id": "-200000006",
+      "params": [
+        {
+          "name": "id",
+          "type": "InputPhoto"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotUserProfilePhoto",
+      "method": "monobot.botUpdateProfilePhoto"
     }
   ]
 }
