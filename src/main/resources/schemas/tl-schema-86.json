@@ -17022,6 +17022,155 @@
       ],
       "type": "BotUserProfilePhoto",
       "method": "monobot.botUpdateProfilePhoto"
+    },
+    {
+      "id": "672011508",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "silent",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "background",
+          "type": "flags.1?true"
+        },
+        {
+          "name": "clearDraft",
+          "type": "flags.2?true"
+        },
+        {
+          "name": "peer",
+          "type": "InputPeer"
+        },
+        {
+          "name": "replyToMsgId",
+          "type": "flags.3?int"
+        },
+        {
+          "name": "media",
+          "type": "InputMedia"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "name": "randomId",
+          "type": "long"
+        },
+        {
+          "name": "reply_markup",
+          "type": "flags.4?ReplyMarkup"
+        },
+        {
+          "name": "entities",
+          "type": "flags.5?Vector<MessageEntity>"
+        },
+        {
+          "name": "time",
+          "type": "int"
+        }
+      ],
+      "type": "Bool",
+      "method": "scheduled.sendMedia"
+    },
+    {
+      "id": "335178416",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "no_webpage",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "silent",
+          "type": "flags.1?true"
+        },
+        {
+          "name": "background",
+          "type": "flags.2?true"
+        },
+        {
+          "name": "clearDraft",
+          "type": "flags.3?true"
+        },
+        {
+          "name": "peer",
+          "type": "InputPeer"
+        },
+        {
+          "name": "replyToMsgId",
+          "type": "flags.4?int"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "name": "randomId",
+          "type": "long"
+        },
+        {
+          "name": "reply_markup",
+          "type": "flags.5?ReplyMarkup"
+        },
+        {
+          "name": "entities",
+          "type": "flags.6?Vector<MessageEntity>"
+        },
+        {
+          "name": "time",
+          "type": "int"
+        }
+      ],
+      "type": "Bool",
+      "method": "scheduled.sendMessage"
+    },
+    {
+      "id": "335178416",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "silent",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "background",
+          "type": "flags.1?true"
+        },
+        {
+          "name": "clearDraft",
+          "type": "flags.2?true"
+        },
+        {
+          "name": "peer",
+          "type": "InputPeer"
+        },
+        {
+          "name": "replyToMsgId",
+          "type": "flags.3?int"
+        },
+        {
+          "name": "multi_media",
+          "type": "flags.4?Vector<InputSingleMedia>"
+        },
+        {
+          "name": "time",
+          "type": "int"
+        }
+      ],
+      "type": "Bool",
+      "method": "scheduled.sendMultiMedia"
     }
   ]
 }
