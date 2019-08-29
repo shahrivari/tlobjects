@@ -52,19 +52,4 @@ class TLReqResLogTest {
         assertThat(log.userId).isEqualTo(deserialize.userId);
         assertThat(log.requestTime).isEqualTo(deserialize.requestTime);
     }
-
-
-    @Disabled
-    @Test
-    void bib() throws IOException {
-        for (int i = 1; i < 100; i++) {
-            byte[] bytes = Files.readAllBytes(Paths.get("/home/che/Desktop/logs/log" + i + ".log"));
-            try {
-                TLObject deserialize = TLObjectUtils.deserialize(bytes);
-                System.out.println(deserialize.getClass().getName());
-            } catch (Exception e){
-                TLObject deserialize = TLObjectUtils.deserialize(bytes);
-            }
-        }
-    }
 }

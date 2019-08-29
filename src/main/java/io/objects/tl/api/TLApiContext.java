@@ -7,7 +7,6 @@ import io.objects.tl.TLContext;
 import io.objects.tl.core.TLBool;
 import io.objects.tl.core.TLObject;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 /**
@@ -32,9 +31,14 @@ public class TLApiContext extends TLContext {
     public void init() {
         String pkg = "io.objects.tl";
         try (ScanResult scanResult = new ClassGraph()
-                .verbose()
-                .enableAllInfo()
+                // .verbose()
+                // .enableAllInfo()
                 .whitelistPackages(pkg)
+                .ignoreMethodVisibility()
+                .ignoreParentClassLoaders()
+                .ignoreClassVisibility()
+                .ignoreParentModuleLayers()
+                .ignoreFieldVisibility()
                 .scan()) {
 
             for (ClassInfo info : scanResult.getSubclasses("io.objects.tl.core.TLObject")) {
@@ -43,15 +47,11 @@ public class TLApiContext extends TLContext {
                 if (Modifier.isAbstract(tlClass.getModifiers()) || TLBool.class.isAssignableFrom(tlClass))
                     continue;
 
-                Object object;
+                int constructorId;
                 try {
-                    object = tlClass.getConstructor().newInstance();
-                    Integer constructorId = (Integer) tlClass.getMethod("getConstructorId").invoke(object);
+                    constructorId = (int) tlClass.getField("CONSTRUCTOR_ID").get(null);
                     registerClass(constructorId, tlClass);
-                } catch (InstantiationException
-                        | IllegalAccessException
-                        | InvocationTargetException
-                        | NoSuchMethodException e) {
+                } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
