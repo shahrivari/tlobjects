@@ -29,8 +29,8 @@ public class MTRpcResult extends TLObject {
         this.contentLen = contentLen;
     }
 
-    public static MTRpcResult createFrom(long msgId, TLObject obj) throws IOException {
-        MTRpcResult rpcResult = new MTRpcResult();
+    public static io.objects.tl.mtproto.tl.MTRpcResult createFrom(long msgId, TLObject obj) throws IOException {
+        io.objects.tl.mtproto.tl.MTRpcResult rpcResult = new io.objects.tl.mtproto.tl.MTRpcResult();
         rpcResult.messageId = msgId;
         rpcResult.content = obj.serialize();
         rpcResult.contentLen = rpcResult.content.length;

@@ -53,6 +53,7 @@ public class TLApiContext extends TLContext {
                     registerClass(constructorId, tlClass);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
+                    System.err.println(tlClass.getName());
                 }
             }
         }
