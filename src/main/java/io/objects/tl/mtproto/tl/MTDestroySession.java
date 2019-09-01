@@ -1,4 +1,4 @@
-package io.objects.tl.mtproto;
+package io.objects.tl.mtproto.tl;
 
 import io.objects.tl.TLContext;
 import io.objects.tl.core.TLMethod;
