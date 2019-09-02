@@ -12047,6 +12047,37 @@
       ],
       "type": "SessionId",
       "predicate": "sessionId"
+    },
+    {
+      "id": "-1333333242",
+      "params": [
+        {
+          "name": "set",
+          "type": "StickerSet"
+        },
+        {
+          "name": "packs",
+          "type": "Vector<StickerPack>"
+        },
+        {
+          "name": "documents",
+          "type": "Vector<Document>"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "responseCode",
+          "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "predicate": "monobot.botStickerSet"
     }
   ],
   "methods": [
@@ -17171,6 +17202,45 @@
       ],
       "type": "Bool",
       "method": "scheduled.sendMultiMedia"
+    },
+    {
+      "id": "-1888884774",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "masks",
+          "type": "flags.0?true"
+        },
+        {
+          "name": "user_id",
+          "type": "InputUser"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "short_name",
+          "type": "string"
+        },
+        {
+          "name": "stickers",
+          "type": "Vector<InputStickerSetItem>"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.createStickerSet"
     }
   ]
 }
