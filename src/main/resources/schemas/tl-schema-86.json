@@ -17241,6 +17241,64 @@
       ],
       "type": "monobot.BotStickerSet",
       "method": "monobot.createStickerSet"
+    },
+    {
+      "id": "-1291540900",
+      "params": [
+        {
+          "name": "file_id",
+          "type": "long"
+        },
+        {
+          "name": "file_part",
+          "type": "int"
+        },
+        {
+          "name": "bytes",
+          "type": "bytes"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotUpdates",
+      "method": "monobot.saveFilePart"
+    },
+    {
+      "id": "-1848000028",
+      "params": [
+        {
+          "name": "user_id",
+          "type": "InputUser"
+        },
+        {
+          "name": "offset",
+          "type": "int"
+        },
+        {
+          "name": "max_id",
+          "type": "long"
+        },
+        {
+          "name": "limit",
+          "type": "int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotPhotos",
+      "method": "monobot.photosGetUserPhotos"
     }
   ]
 }
