@@ -17299,6 +17299,25 @@
       ],
       "type": "monobot.BotPhotos",
       "method": "monobot.photosGetUserPhotos"
+    },
+    {
+      "id": "-143777777",
+      "params": [
+        {
+          "name": "sticker",
+          "type": "InputDocument"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.stickersRemoveStickerFromSet"
     }
   ]
 }
