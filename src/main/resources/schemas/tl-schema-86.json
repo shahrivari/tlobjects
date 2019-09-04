@@ -12078,6 +12078,310 @@
       ],
       "type": "monobot.BotStickerSet",
       "predicate": "monobot.botStickerSet"
+    },
+    {
+      "id": "-989898984",
+      "params": [
+        {
+          "name": "phone_number",
+          "type": "string"
+        },
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "vcard",
+          "type": "string"
+        },
+        {
+          "name": "user_id",
+          "type": "int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaContact"
+    },
+    {
+      "id": "-1623232322",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "document",
+          "type": "flags.0?Document"
+        },
+        {
+          "name": "ttl_seconds",
+          "type": "flags.2?int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaDocument"
+    },
+    {
+      "id": "1043243222",
+      "params": [
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaEmpty"
+    },
+    {
+      "id": "-54321111",
+      "params": [
+        {
+          "name": "game",
+          "type": "Game"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaGame"
+    },
+    {
+      "id": "1131313131",
+      "params": [
+        {
+          "name": "geo",
+          "type": "GeoPoint"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaGeo"
+    },
+    {
+      "id": "2122133333",
+      "params": [
+        {
+          "name": "geo",
+          "type": "GeoPoint"
+        },
+        {
+          "name": "period",
+          "type": "int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaGeoLive"
+    },
+    {
+      "id": "-2090909090",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "shipping_address_requested",
+          "type": "flags.1?true"
+        },
+        {
+          "name": "test",
+          "type": "flags.3?true"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "photo",
+          "type": "flags.0?WebDocument"
+        },
+        {
+          "name": "receipt_msg_id",
+          "type": "flags.2?int"
+        },
+        {
+          "name": "currency",
+          "type": "string"
+        },
+        {
+          "name": "total_amount",
+          "type": "long"
+        },
+        {
+          "name": "start_param",
+          "type": "string"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaInvoice"
+    },
+    {
+      "id": "1700000000",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "photo",
+          "type": "flags.0?Photo"
+        },
+        {
+          "name": "ttl_seconds",
+          "type": "flags.2?int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaPhoto"
+    },
+    {
+      "id": "-1618676578",
+      "params": [
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaUnsupported"
+    },
+    {
+      "id": "700000000",
+      "params": [
+        {
+          "name": "geo",
+          "type": "GeoPoint"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "address",
+          "type": "string"
+        },
+        {
+          "name": "provider",
+          "type": "string"
+        },
+        {
+          "name": "venue_id",
+          "type": "string"
+        },
+        {
+          "name": "venue_type",
+          "type": "string"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaVenue"
+    },
+    {
+      "id": "1457575028",
+      "params": [
+        {
+          "name": "geo",
+          "type": "GeoPoint"
+        }
+      ],
+      "type": "MessageMedia",
+      "predicate": "messageMediaGeo"
+    },
+    {
+      "id": "-1878765655",
+      "params": [
+        {
+          "name": "webpage",
+          "type": "WebPage"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "predicate": "botMessageMediaWebPage"
     }
   ],
   "methods": [
@@ -17318,6 +17622,33 @@
       ],
       "type": "monobot.BotStickerSet",
       "method": "monobot.stickersRemoveStickerFromSet"
+    },
+    {
+      "id": "1309968888",
+      "params": [
+        {
+          "name": "peer",
+          "type": "InputPeer"
+        },
+        {
+          "name": "media",
+          "type": "InputMedia"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "responseCode",
+          "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
+        }
+      ],
+      "type": "BotMessageMedia",
+      "method": "monobot.uploadMedia"
     }
   ]
 }
