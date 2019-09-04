@@ -192,7 +192,6 @@ import io.objects.tl.api.request.TLRequestHelpGetPassportConfig;
 import io.objects.tl.api.request.TLRequestHelpGetProxyData;
 import io.objects.tl.api.request.TLRequestHelpGetRecentMeUrls;
 import io.objects.tl.api.request.TLRequestHelpGetSupport;
-import io.objects.tl.api.request.TLRequestHelpGetTermsOfServiceUpdate;
 import io.objects.tl.api.request.TLRequestHelpSaveAppLog;
 import io.objects.tl.api.request.TLRequestHelpSetBotUpdatesStatus;
 import io.objects.tl.api.request.TLRequestInitConnection;
@@ -1086,12 +1085,6 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     @Override
     public TLSupport helpGetSupport() throws RpcErrorException, IOException {
         return (TLSupport) executeRpcQuery(new TLRequestHelpGetSupport());
-    }
-
-    @Override
-    public TLAbsTermsOfServiceUpdate helpGetTermsOfServiceUpdate() throws RpcErrorException,
-            IOException {
-        return (TLAbsTermsOfServiceUpdate) executeRpcQuery(new TLRequestHelpGetTermsOfServiceUpdate());
     }
 
     @Override
