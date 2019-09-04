@@ -39,8 +39,4 @@ class MTMessage @JvmOverloads constructor(var messageId: Long = 0,
     override fun toString(): String {
         return "MTMessage: {id: $messageId, seqNo: $seqNo}"
     }
-
-    companion object {
-        const val CONSTRUCTOR_ID = 0
-    }
 }

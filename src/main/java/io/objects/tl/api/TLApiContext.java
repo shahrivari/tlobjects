@@ -4,8 +4,11 @@ import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ScanResult;
 import io.objects.tl.TLContext;
+import io.objects.tl.api.help.TLGetTermsOfServiceUpdate;
 import io.objects.tl.core.TLBool;
 import io.objects.tl.core.TLObject;
+import io.objects.tl.mtproto.tl.MTInvokeAfter;
+import io.objects.tl.mtproto.tl.MTMessage;
 
 import java.lang.reflect.Modifier;
 
@@ -44,7 +47,9 @@ public class TLApiContext extends TLContext {
             for (ClassInfo info : scanResult.getSubclasses("io.objects.tl.core.TLObject")) {
                 Class<? extends TLObject> tlClass = (Class<? extends TLObject>) info.loadClass();
 
-                if (Modifier.isAbstract(tlClass.getModifiers()) || TLBool.class.isAssignableFrom(tlClass))
+                if (Modifier.isAbstract(tlClass.getModifiers()) || TLBool.class.isAssignableFrom(tlClass)
+                        || tlClass == MTInvokeAfter.class || tlClass == TLGetTermsOfServiceUpdate.class
+                        || tlClass == MTMessage.class)
                     continue;
 
                 int constructorId;
