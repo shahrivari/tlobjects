@@ -15,24 +15,34 @@ import static io.objects.tl.TLObjectUtils.*;
  */
 public class TLReqResLog extends TLObject {
     public static final int CONSTRUCTOR_ID = 0x87232bc8;
+
     private final String _constructor = "reqResLog#87232bc8";
+
     protected long authKeyId;
+
     protected int userId;
+
     protected long requestTime;
+
     protected long responseTime;
+
     protected TLObject request;
+
+    //    protected TLObject updates;
+
     protected TLObject response;
 
     public TLReqResLog() {
     }
 
-    public TLReqResLog(long authKeyId, int userId, long requestTime, long responseTime, TLObject request, TLObject response) {
+    public TLReqResLog(long authKeyId, int userId, long requestTime, long responseTime, TLObject request, TLObject response, TLObject updates) {
         this.authKeyId = authKeyId;
         this.userId = userId;
         this.requestTime = requestTime;
         this.responseTime = responseTime;
         this.request = request;
         this.response = response;
+//        this.updates = updates;
     }
 
     @Override
@@ -43,6 +53,7 @@ public class TLReqResLog extends TLObject {
         writeLong(responseTime, stream);
         writeTLObject(request, stream);
         writeTLObject(response, stream);
+//        writeTLObject(updates, stream);
     }
 
     @Override
@@ -54,6 +65,7 @@ public class TLReqResLog extends TLObject {
         responseTime = readLong(stream);
         request = readTLObject(stream, context);
         response = readTLObject(stream, context);
+//        updates = readTLObject(stream, context);
     }
 
     @Override
@@ -65,6 +77,7 @@ public class TLReqResLog extends TLObject {
         size += SIZE_INT32;
         size += request.computeSerializedSize();
         size += response.computeSerializedSize();
+//        size += updates.computeSerializedSize();
 
         return size;
     }
@@ -126,4 +139,14 @@ public class TLReqResLog extends TLObject {
     public void setResponse(TLObject response) {
         this.response = response;
     }
+
+/*
+    public TLObject getUpdates() {
+        return updates;
+    }
+
+    public void setUpdates(TLObject updates) {
+        this.updates = updates;
+    }
+*/
 }
