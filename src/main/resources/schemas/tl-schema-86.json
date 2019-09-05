@@ -17649,6 +17649,29 @@
       ],
       "type": "BotMessageMedia",
       "method": "monobot.uploadMedia"
+    },
+    {
+      "id": "-2123456789",
+      "params": [
+        {
+          "name": "stickerset",
+          "type": "InputStickerSet"
+        },
+        {
+          "name": "sticker",
+          "type": "InputStickerSetItem"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.addStickerToSet"
     }
   ]
 }
