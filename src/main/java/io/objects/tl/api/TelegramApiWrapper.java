@@ -179,7 +179,6 @@ import io.objects.tl.api.request.TLRequestContactsResolveUsername;
 import io.objects.tl.api.request.TLRequestContactsSearch;
 import io.objects.tl.api.request.TLRequestContactsToggleTopPeers;
 import io.objects.tl.api.request.TLRequestContactsUnblock;
-import io.objects.tl.api.request.TLRequestGetLanguages;
 import io.objects.tl.api.request.TLRequestHelpAcceptTermsOfService;
 import io.objects.tl.api.request.TLRequestHelpGetAppChangelog;
 import io.objects.tl.api.request.TLRequestHelpGetAppUpdate;
@@ -1016,11 +1015,6 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     @Override
     public TLBool contactsUnblock(TLAbsInputUser id) throws RpcErrorException, IOException {
         return (TLBool) executeRpcQuery(new TLRequestContactsUnblock(id));
-    }
-
-    @Override
-    public TLLangPackLanguage getLanguages() throws RpcErrorException, IOException {
-        return (TLLangPackLanguage) executeRpcQuery(new TLRequestGetLanguages());
     }
 
     @Override

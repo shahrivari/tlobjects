@@ -17672,6 +17672,38 @@
       ],
       "type": "monobot.BotStickerSet",
       "method": "monobot.addStickerToSet"
+    },
+    {
+      "id": "-1699363442",
+      "method": "langpack.getLangPackV71",
+      "params": [
+        {
+          "name": "lang_code",
+          "type": "string"
+        }
+      ],
+      "type": "LangPackDifference"
+    },
+    {
+      "id": "773776152",
+      "method": "langpack.getStringsV71",
+      "params": [
+        {
+          "name": "lang_code",
+          "type": "string"
+        },
+        {
+          "name": "keys",
+          "type": "Vector<string>"
+        }
+      ],
+      "type": "Vector<LangPackString>"
+    },
+    {
+      "id": "-2146445955",
+      "method": "langpack.getLanguagesV71",
+      "params": [],
+      "type": "Vector<LangPackLanguage>"
     }
   ]
 }
