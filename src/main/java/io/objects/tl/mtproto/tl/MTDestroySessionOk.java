@@ -12,9 +12,9 @@ import static io.objects.tl.TLObjectUtils.SIZE_CONSTRUCTOR_ID;
 import static io.objects.tl.TLObjectUtils.SIZE_INT64;
 
 public class MTDestroySessionOk extends MTAbsDestroySessionResponse {
-    public static final int CONSTRUCTOR_ID = 0xe7512126;
+    public static final int CONSTRUCTOR_ID = 0xe7315726;
 
-    private final String _constructor = "destroySessionOk#e7512126";
+    private final String _constructor = "destroySessionOk#e7315726";
 
     public MTDestroySessionOk() {
     }
