@@ -17704,6 +17704,67 @@
       "method": "langpack.getLanguagesV71",
       "params": [],
       "type": "Vector<LangPackLanguage>"
+    },
+    {
+      "id": "-9090906",
+      "params": [
+        {
+          "name": "sticker",
+          "type": "InputDocument"
+        },
+        {
+          "name": "position",
+          "type": "int"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.changeStickerPosition"
+    },
+    {
+      "id": "-122220000",
+      "params": [
+        {
+          "name": "sticker",
+          "type": "InputDocument"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.removeStickerFromSet"
+    },
+    {
+      "id": "677777776",
+      "params": [
+        {
+          "name": "stickerset",
+          "type": "InputStickerSet"
+        },
+        {
+          "name": "requestId",
+          "type": "long"
+        },
+        {
+          "name": "botId",
+          "type": "int"
+        }
+      ],
+      "type": "monobot.BotStickerSet",
+      "method": "monobot.getStickerSet"
     }
   ]
 }
