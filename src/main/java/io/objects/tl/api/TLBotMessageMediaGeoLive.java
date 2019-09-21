@@ -21,10 +21,6 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
 
     protected int period;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaGeoLive#7e7d2f55";
 
     public TLBotMessageMediaGeoLive() {

@@ -27,10 +27,6 @@ public class TLBotMessageMediaContact extends TLAbsBotMessageMedia {
 
     protected int userId;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaContact#c4ff5718";
 
     public TLBotMessageMediaContact() {

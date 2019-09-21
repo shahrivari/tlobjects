@@ -29,10 +29,6 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
 
     protected String venueType;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaVenue#29b92700";
 
     public TLBotMessageMediaVenue() {

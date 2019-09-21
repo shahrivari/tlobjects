@@ -38,10 +38,6 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
 
     protected String startParam;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaInvoice#835f425e";
 
     public TLBotMessageMediaInvoice() {

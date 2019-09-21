@@ -19,10 +19,6 @@ public class TLBotMessageMediaWebPage extends TLAbsBotMessageMedia {
 
     protected TLAbsWebPage webpage;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaWebPage#90044fa9";
 
     public TLBotMessageMediaWebPage() {

@@ -19,10 +19,6 @@ public class TLBotMessageMediaGame extends TLAbsBotMessageMedia {
 
     protected TLGame game;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaGame#fcc32029";
 
     public TLBotMessageMediaGame() {
