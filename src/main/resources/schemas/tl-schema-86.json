@@ -12107,8 +12107,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12134,8 +12138,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12149,8 +12157,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12168,8 +12180,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12187,8 +12203,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12210,8 +12230,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12265,8 +12289,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12300,15 +12328,19 @@
       "predicate": "botMessageMediaPhoto"
     },
     {
-      "id": "-1618676578",
+      "id": "-1619659618",
       "params": [
         {
           "name": "requestId",
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12346,8 +12378,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -12376,8 +12412,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -17639,12 +17679,8 @@
           "type": "long"
         },
         {
-          "name": "responseCode",
+          "name": "botId",
           "type": "int"
-        },
-        {
-          "name": "error",
-          "type": "string"
         }
       ],
       "type": "BotMessageMedia",

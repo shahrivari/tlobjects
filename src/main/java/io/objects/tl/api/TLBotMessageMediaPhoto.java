@@ -24,6 +24,8 @@ public class TLBotMessageMediaPhoto extends TLAbsBotMessageMedia {
 
     protected Integer ttlSeconds;
 
+    protected int botId;
+
     private final String _constructor = "botMessageMediaPhoto#6553f100";
 
     public TLBotMessageMediaPhoto() {

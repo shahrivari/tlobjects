@@ -29,13 +29,17 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
 
     protected String venueType;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaVenue#29b92700";
 
     public TLBotMessageMediaVenue() {
     }
 
     public TLBotMessageMediaVenue(TLAbsGeoPoint geo, String title, String address, String provider,
-            String venueId, String venueType, long requestId, int botId) {
+            String venueId, String venueType, long requestId, int responseCode, String error) {
         this.geo = geo;
         this.title = title;
         this.address = address;
@@ -43,7 +47,8 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
         this.venueId = venueId;
         this.venueType = venueType;
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     @Override
@@ -55,7 +60,8 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
         writeString(venueId, stream);
         writeString(venueType, stream);
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
@@ -68,7 +74,8 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
         venueId = readTLString(stream);
         venueType = readTLString(stream);
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -82,6 +89,7 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
         size += computeTLStringSerializedSize(venueType);
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -151,11 +159,19 @@ public class TLBotMessageMediaVenue extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

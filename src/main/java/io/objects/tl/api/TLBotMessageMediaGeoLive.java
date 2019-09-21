@@ -21,16 +21,22 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
 
     protected int period;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaGeoLive#7e7d2f55";
 
     public TLBotMessageMediaGeoLive() {
     }
 
-    public TLBotMessageMediaGeoLive(TLAbsGeoPoint geo, int period, long requestId, int botId) {
+    public TLBotMessageMediaGeoLive(TLAbsGeoPoint geo, int period, long requestId, int responseCode,
+            String error) {
         this.geo = geo;
         this.period = period;
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     @Override
@@ -38,7 +44,8 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
         writeTLObject(geo, stream);
         writeInt(period, stream);
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
@@ -47,7 +54,8 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
         geo = readTLObject(stream, context, TLAbsGeoPoint.class, -1);
         period = readInt(stream);
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -57,6 +65,7 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
         size += SIZE_INT32;
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -94,11 +103,19 @@ public class TLBotMessageMediaGeoLive extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }
