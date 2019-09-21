@@ -19,22 +19,28 @@ public class TLBotMessageMediaGame extends TLAbsBotMessageMedia {
 
     protected TLGame game;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaGame#fcc32029";
 
     public TLBotMessageMediaGame() {
     }
 
-    public TLBotMessageMediaGame(TLGame game, long requestId, int botId) {
+    public TLBotMessageMediaGame(TLGame game, long requestId, int responseCode, String error) {
         this.game = game;
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeTLObject(game, stream);
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
@@ -42,7 +48,8 @@ public class TLBotMessageMediaGame extends TLAbsBotMessageMedia {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         game = readTLObject(stream, context, TLGame.class, TLGame.CONSTRUCTOR_ID);
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -51,6 +58,7 @@ public class TLBotMessageMediaGame extends TLAbsBotMessageMedia {
         size += game.computeSerializedSize();
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -80,11 +88,19 @@ public class TLBotMessageMediaGame extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

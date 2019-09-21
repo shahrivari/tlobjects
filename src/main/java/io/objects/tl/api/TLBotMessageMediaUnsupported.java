@@ -17,27 +17,34 @@ import java.lang.SuppressWarnings;
 public class TLBotMessageMediaUnsupported extends TLAbsBotMessageMedia {
     public static final int CONSTRUCTOR_ID = 0x9f75f49e;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaUnsupported#9f75f49e";
 
     public TLBotMessageMediaUnsupported() {
     }
 
-    public TLBotMessageMediaUnsupported(long requestId, int botId) {
+    public TLBotMessageMediaUnsupported(long requestId, int responseCode, String error) {
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -45,6 +52,7 @@ public class TLBotMessageMediaUnsupported extends TLAbsBotMessageMedia {
         int size = SIZE_CONSTRUCTOR_ID;
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -66,11 +74,19 @@ public class TLBotMessageMediaUnsupported extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

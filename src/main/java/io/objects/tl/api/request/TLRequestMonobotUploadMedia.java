@@ -28,9 +28,7 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
 
     protected long requestId;
 
-    protected int responseCode;
-
-    protected String error;
+    protected int botId;
 
     private final String _constructor = "monobot.uploadMedia#4e1489f8";
 
@@ -38,12 +36,11 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
     }
 
     public TLRequestMonobotUploadMedia(TLAbsInputPeer peer, TLAbsInputMedia media, long requestId,
-            int responseCode, String error) {
+            int botId) {
         this.peer = peer;
         this.media = media;
         this.requestId = requestId;
-        this.responseCode = responseCode;
-        this.error = error;
+        this.botId = botId;
     }
 
     @Override
@@ -65,8 +62,7 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
         writeTLObject(peer, stream);
         writeTLObject(media, stream);
         writeLong(requestId, stream);
-        writeInt(responseCode, stream);
-        writeString(error, stream);
+        writeInt(botId, stream);
     }
 
     @Override
@@ -75,8 +71,7 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
         peer = readTLObject(stream, context, TLAbsInputPeer.class, -1);
         media = readTLObject(stream, context, TLAbsInputMedia.class, -1);
         requestId = readLong(stream);
-        responseCode = readInt(stream);
-        error = readTLString(stream);
+        botId = readInt(stream);
     }
 
     @Override
@@ -86,7 +81,6 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
         size += media.computeSerializedSize();
         size += SIZE_INT64;
         size += SIZE_INT32;
-        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -124,19 +118,11 @@ public class TLRequestMonobotUploadMedia extends TLMethod<TLAbsBotMessageMedia> 
         this.requestId = requestId;
     }
 
-    public int getResponseCode() {
-        return responseCode;
+    public int getBotId() {
+        return botId;
     }
 
-    public void setResponseCode(int responseCode) {
-        this.responseCode = responseCode;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
+    public void setBotId(int botId) {
+        this.botId = botId;
     }
 }
