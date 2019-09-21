@@ -24,10 +24,6 @@ public class TLBotMessageMediaDocument extends TLAbsBotMessageMedia {
 
     protected Integer ttlSeconds;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaDocument#9f3f70be";
 
     public TLBotMessageMediaDocument() {

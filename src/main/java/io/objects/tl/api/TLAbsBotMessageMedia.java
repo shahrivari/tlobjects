@@ -4,6 +4,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.*;
 
 import io.objects.tl.core.TLObject;
+import java.lang.String;
 
 /**
  * Abstraction level for the following constructors:
@@ -16,7 +17,7 @@ import io.objects.tl.core.TLObject;
  * <li>{@link TLBotMessageMediaGeoLive}: botMessageMediaGeoLive#7e7d2f55</li>
  * <li>{@link TLBotMessageMediaInvoice}: botMessageMediaInvoice#835f425e</li>
  * <li>{@link TLBotMessageMediaPhoto}: botMessageMediaPhoto#6553f100</li>
- * <li>{@link TLBotMessageMediaUnsupported}: botMessageMediaUnsupported#9f84f49e</li>
+ * <li>{@link TLBotMessageMediaUnsupported}: botMessageMediaUnsupported#9f75f49e</li>
  * <li>{@link TLBotMessageMediaVenue}: botMessageMediaVenue#29b92700</li>
  * <li>{@link TLBotMessageMediaWebPage}: botMessageMediaWebPage#90044fa9</li>
  * </ul>
@@ -26,7 +27,9 @@ import io.objects.tl.core.TLObject;
 public abstract class TLAbsBotMessageMedia extends TLObject {
     protected long requestId;
 
-    protected int botId;
+    protected int responseCode;
+
+    protected String error;
 
     public TLAbsBotMessageMedia() {
     }
@@ -39,11 +42,19 @@ public abstract class TLAbsBotMessageMedia extends TLObject {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

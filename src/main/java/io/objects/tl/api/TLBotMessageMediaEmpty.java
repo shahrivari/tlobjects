@@ -17,10 +17,6 @@ import java.lang.SuppressWarnings;
 public class TLBotMessageMediaEmpty extends TLAbsBotMessageMedia {
     public static final int CONSTRUCTOR_ID = 0x3e2ea0d6;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaEmpty#3e2ea0d6";
 
     public TLBotMessageMediaEmpty() {

@@ -19,10 +19,6 @@ public class TLBotMessageMediaGeo extends TLAbsBotMessageMedia {
 
     protected TLAbsGeoPoint geo;
 
-    protected int responseCode;
-
-    protected String error;
-
     private final String _constructor = "botMessageMediaGeo#436e77eb";
 
     public TLBotMessageMediaGeo() {

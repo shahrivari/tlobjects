@@ -12320,8 +12320,12 @@
           "type": "long"
         },
         {
-          "name": "botId",
+          "name": "responseCode",
           "type": "int"
+        },
+        {
+          "name": "error",
+          "type": "string"
         }
       ],
       "type": "BotMessageMedia",
@@ -17742,7 +17746,7 @@
       "type": "Vector<LangPackLanguage>"
     },
     {
-      "id": "-9090906",
+      "id": "-1111333",
       "params": [
         {
           "name": "sticker",
