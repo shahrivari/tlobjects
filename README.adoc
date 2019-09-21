@@ -1,0 +1,23 @@
+= [blue]*Generate TLObjects*
+
+==== [black]*TL schema file contains two parts.*
+* [red]*constructor*
+* [red]*method*
+
+---
+
+
+At First TL schema should be added to [red]#_tl-schema-86_# file.
+
+NOTE: Depends on type of TL, add schema to constructor or method part.
+
+Now we should generate schema to create new TL classes.
+For this purpose open GenerateClasses.kt file.
+It contains main method.
+Run main and wait until finish classes generation.
+Thats right.
+Now new TL classes has generated.
+But Unfortunately some of other Tl classes has changed by generator.
+They should have no changes. So open local changes and revert those classes.
+Then add new classes to git, commit and push.
+_Now your work has finished._
