@@ -19,22 +19,29 @@ public class TLBotMessageMediaWebPage extends TLAbsBotMessageMedia {
 
     protected TLAbsWebPage webpage;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaWebPage#90044fa9";
 
     public TLBotMessageMediaWebPage() {
     }
 
-    public TLBotMessageMediaWebPage(TLAbsWebPage webpage, long requestId, int botId) {
+    public TLBotMessageMediaWebPage(TLAbsWebPage webpage, long requestId, int responseCode,
+            String error) {
         this.webpage = webpage;
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeTLObject(webpage, stream);
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
@@ -42,7 +49,8 @@ public class TLBotMessageMediaWebPage extends TLAbsBotMessageMedia {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         webpage = readTLObject(stream, context, TLAbsWebPage.class, -1);
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -51,6 +59,7 @@ public class TLBotMessageMediaWebPage extends TLAbsBotMessageMedia {
         size += webpage.computeSerializedSize();
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -80,11 +89,19 @@ public class TLBotMessageMediaWebPage extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

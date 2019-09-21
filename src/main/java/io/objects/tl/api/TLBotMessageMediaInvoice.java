@@ -38,6 +38,10 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
 
     protected String startParam;
 
+    protected int responseCode;
+
+    protected String error;
+
     private final String _constructor = "botMessageMediaInvoice#835f425e";
 
     public TLBotMessageMediaInvoice() {
@@ -45,7 +49,7 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
 
     public TLBotMessageMediaInvoice(boolean shippingAddressRequested, boolean test, String title,
             String description, TLAbsWebDocument photo, Integer receiptMsgId, String currency,
-            long totalAmount, String startParam, long requestId, int botId) {
+            long totalAmount, String startParam, long requestId, int responseCode, String error) {
         this.shippingAddressRequested = shippingAddressRequested;
         this.test = test;
         this.title = title;
@@ -56,7 +60,8 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
         this.totalAmount = totalAmount;
         this.startParam = startParam;
         this.requestId = requestId;
-        this.botId = botId;
+        this.responseCode = responseCode;
+        this.error = error;
     }
 
     private void computeFlags() {
@@ -86,7 +91,8 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
         writeLong(totalAmount, stream);
         writeString(startParam, stream);
         writeLong(requestId, stream);
-        writeInt(botId, stream);
+        writeInt(responseCode, stream);
+        writeString(error, stream);
     }
 
     @Override
@@ -103,7 +109,8 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
         totalAmount = readLong(stream);
         startParam = readTLString(stream);
         requestId = readLong(stream);
-        botId = readInt(stream);
+        responseCode = readInt(stream);
+        error = readTLString(stream);
     }
 
     @Override
@@ -127,6 +134,7 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
         size += computeTLStringSerializedSize(startParam);
         size += SIZE_INT64;
         size += SIZE_INT32;
+        size += computeTLStringSerializedSize(error);
         return size;
     }
 
@@ -220,11 +228,19 @@ public class TLBotMessageMediaInvoice extends TLAbsBotMessageMedia {
         this.requestId = requestId;
     }
 
-    public int getBotId() {
-        return botId;
+    public int getResponseCode() {
+        return responseCode;
     }
 
-    public void setBotId(int botId) {
-        this.botId = botId;
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }
