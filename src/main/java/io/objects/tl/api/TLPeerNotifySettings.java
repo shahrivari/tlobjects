@@ -15,12 +15,18 @@ import static io.objects.tl.TLObjectUtils.*;
  */
 public class TLPeerNotifySettings extends TLObject {
     public static final int CONSTRUCTOR_ID = 0xaf509d20;
-    private final String _constructor = "peerNotifySettings#af509d20";
+
     protected int flags;
+
     protected boolean showPreviews;
+
     protected boolean silent;
+
     protected Integer muteUntil;
+
     protected String sound;
+
+    private final String _constructor = "peerNotifySettings#af509d20";
 
     public TLPeerNotifySettings() {
     }
