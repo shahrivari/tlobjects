@@ -24,8 +24,6 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
 
     protected String userName;
 
-    protected long requestId;
-
     private final String _constructor = "monobot.signUp#bebc264";
 
     public TLRequestMonobotSignUp() {
@@ -34,7 +32,6 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
     public TLRequestMonobotSignUp(String botName, String userName, long requestId) {
         this.botName = botName;
         this.userName = userName;
-        this.requestId = requestId;
     }
 
     @Override
@@ -55,7 +52,6 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
     public void serializeBody(OutputStream stream) throws IOException {
         writeString(botName, stream);
         writeString(userName, stream);
-        writeLong(requestId, stream);
     }
 
     @Override
@@ -63,7 +59,6 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         botName = readTLString(stream);
         userName = readTLString(stream);
-        requestId = readLong(stream);
     }
 
     @Override
@@ -71,7 +66,6 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
         int size = SIZE_CONSTRUCTOR_ID;
         size += computeTLStringSerializedSize(botName);
         size += computeTLStringSerializedSize(userName);
-        size += SIZE_INT64;
         return size;
     }
 
@@ -99,13 +93,5 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public long getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(long requestId) {
-        this.requestId = requestId;
     }
 }
