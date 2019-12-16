@@ -1842,9 +1842,9 @@ public abstract class TelegramApiWrapper implements TelegramApi {
     }
 
     @Override
-    public TLBotUpdates monobotSignUp(String botName, String userName, long requestId) throws
+    public TLBotUpdates monobotSignUp(String botName, String userName) throws
             RpcErrorException, IOException {
-        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSignUp(botName, userName, requestId));
+        return (TLBotUpdates) executeRpcQuery(new TLRequestMonobotSignUp(botName, userName));
     }
 
     @Override

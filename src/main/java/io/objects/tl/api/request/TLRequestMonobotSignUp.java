@@ -29,7 +29,7 @@ public class TLRequestMonobotSignUp extends TLMethod<TLBotUpdates> {
     public TLRequestMonobotSignUp() {
     }
 
-    public TLRequestMonobotSignUp(String botName, String userName, long requestId) {
+    public TLRequestMonobotSignUp(String botName, String userName) {
         this.botName = botName;
         this.userName = userName;
     }
