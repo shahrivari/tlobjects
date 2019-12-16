@@ -795,7 +795,7 @@ public interface TelegramApi {
             String url, int cacheTime, long requestId, int botId) throws RpcErrorException,
             IOException;
 
-    TLBotUpdates monobotSignUp(String botName, String userName, long requestId) throws
+    TLBotUpdates monobotSignUp(String botName, String userName) throws
             RpcErrorException, IOException;
 
     TLBotFile monobotUploadGetFile(TLAbsInputFileLocation location, int offset, int limit,
