@@ -13,17 +13,17 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.SIZE_CONSTRUCTOR_ID;
 import static io.objects.tl.TLObjectUtils.computeTLStringSerializedSize;
 
-public class TLRequestAuthSignInEmail extends TLMethod<TLBool> {
+public class TLRequestAuthEmailSignIn extends TLMethod<TLBool> {
     public static final int CONSTRUCTOR_ID = 0xbcd43581;
 
     private final String _constructor = "auth.signInEmail#bcd43581";
 
     protected String email;
 
-    public TLRequestAuthSignInEmail() {
+    public TLRequestAuthEmailSignIn() {
     }
 
-    public TLRequestAuthSignInEmail(String phoneNumber, String phoneCodeHash, String phoneCode, String email) {
+    public TLRequestAuthEmailSignIn(String email) {
         this.email = email;
     }
 
