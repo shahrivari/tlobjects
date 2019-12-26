@@ -1,7 +1,7 @@
 package io.objects.tl.api.request;
 
 import io.objects.tl.TLContext;
-import io.objects.tl.api.auth.TLSentCode;
+import io.objects.tl.core.TLBool;
 import io.objects.tl.core.TLMethod;
 import io.objects.tl.core.TLObject;
 
@@ -13,7 +13,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.SIZE_CONSTRUCTOR_ID;
 import static io.objects.tl.TLObjectUtils.computeTLStringSerializedSize;
 
-public class TLRequestAuthResendEmailCode extends TLMethod<TLSentCode> {
+public class TLRequestAuthResendEmailCode extends TLMethod<TLBool> {
     public static final int CONSTRUCTOR_ID = 0x5ef1a7bf;
     private final String _constructor = "auth.resendCode#5ef1a7bf";
     protected String email;
@@ -27,16 +27,16 @@ public class TLRequestAuthResendEmailCode extends TLMethod<TLSentCode> {
 
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
-    public TLSentCode deserializeResponse(InputStream stream, TLContext context) throws
+    public TLBool deserializeResponse(InputStream stream, TLContext context) throws
             IOException {
         final TLObject response = readTLObject(stream, context);
         if (response == null) {
             throw new IOException("Unable to parse response");
         }
-        if (!(response instanceof TLSentCode)) {
+        if (!(response instanceof TLBool)) {
             throw new IOException("Incorrect response type, expected " + getClass().getCanonicalName() + ", found " + response.getClass().getCanonicalName());
         }
-        return (TLSentCode) response;
+        return (TLBool) response;
     }
 
     @Override
