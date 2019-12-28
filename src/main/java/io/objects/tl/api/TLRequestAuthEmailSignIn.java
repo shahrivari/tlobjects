@@ -20,12 +20,14 @@ public class TLRequestAuthEmailSignIn extends TLMethod<TLAuthorization> {
     public static final int CONSTRUCTOR_ID = 0xbcd51582;
     private final String _constructor = "auth.emailSignIn#bcd51582";
     protected String email;
+    protected String emailCode;
 
     public TLRequestAuthEmailSignIn() {
     }
 
-    public TLRequestAuthEmailSignIn(String email) {
+    public TLRequestAuthEmailSignIn(String email, String emailCode) {
         this.email = email;
+        this.emailCode = emailCode;
     }
 
     @Override
@@ -45,18 +47,21 @@ public class TLRequestAuthEmailSignIn extends TLMethod<TLAuthorization> {
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeString(email, stream);
+        writeString(emailCode, stream);
     }
 
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         email = readTLString(stream);
+        emailCode = readTLString(stream);
     }
 
     @Override
     public int computeSerializedSize() {
         int size = SIZE_CONSTRUCTOR_ID;
         size += computeTLStringSerializedSize(email);
+        size += computeTLStringSerializedSize(emailCode);
         return size;
     }
 
@@ -76,5 +81,13 @@ public class TLRequestAuthEmailSignIn extends TLMethod<TLAuthorization> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEmailCode() {
+        return emailCode;
+    }
+
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
     }
 }
