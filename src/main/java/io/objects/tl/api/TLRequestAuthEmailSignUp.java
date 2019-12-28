@@ -20,14 +20,16 @@ public class TLRequestAuthEmailSignUp extends TLMethod<TLAuthorization> {
     public static final int CONSTRUCTOR_ID = 0x1b061624;
     private final String _constructor = "auth.emailSignUp#1b061624";
     protected String email;
+    protected String emailCode;
     protected String firstName;
     protected String lastName;
 
     public TLRequestAuthEmailSignUp() {
     }
 
-    public TLRequestAuthEmailSignUp(String email, String firstName, String lastName) {
+    public TLRequestAuthEmailSignUp(String email, String emailCode, String firstName, String lastName) {
         this.email = email;
+        this.emailCode = emailCode;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -49,6 +51,7 @@ public class TLRequestAuthEmailSignUp extends TLMethod<TLAuthorization> {
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeString(email, stream);
+        writeString(emailCode, stream);
         writeString(firstName, stream);
         writeString(lastName, stream);
     }
@@ -57,6 +60,7 @@ public class TLRequestAuthEmailSignUp extends TLMethod<TLAuthorization> {
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         email = readTLString(stream);
+        emailCode = readTLString(stream);
         firstName = readTLString(stream);
         lastName = readTLString(stream);
     }
@@ -65,6 +69,7 @@ public class TLRequestAuthEmailSignUp extends TLMethod<TLAuthorization> {
     public int computeSerializedSize() {
         int size = SIZE_CONSTRUCTOR_ID;
         size += computeTLStringSerializedSize(email);
+        size += computeTLStringSerializedSize(emailCode);
         size += computeTLStringSerializedSize(firstName);
         size += computeTLStringSerializedSize(lastName);
         return size;
@@ -86,6 +91,14 @@ public class TLRequestAuthEmailSignUp extends TLMethod<TLAuthorization> {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEmailCode() {
+        return emailCode;
+    }
+
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
     }
 
     public String getFirstName() {
