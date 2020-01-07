@@ -4,10 +4,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.*;
 
 import io.objects.tl.TLContext;
-import io.objects.tl.api.TLAbsInputChannel;
-import io.objects.tl.api.TLAbsInputUser;
-import io.objects.tl.api.TLAbsUpdates;
-import io.objects.tl.api.TLChannelAdminRights;
+import io.objects.tl.api.*;
 import io.objects.tl.core.TLMethod;
 import io.objects.tl.core.TLObject;
 import java.io.IOException;
@@ -27,7 +24,7 @@ public class TLRequestChannelsEditAdmin extends TLMethod<TLAbsUpdates> {
 
     protected TLAbsInputUser userId;
 
-    protected TLChannelAdminRights adminRights;
+    protected TLAbsChannelAdminRights adminRights;
 
     private final String _constructor = "channels.editAdmin#20b88214";
 
@@ -35,7 +32,7 @@ public class TLRequestChannelsEditAdmin extends TLMethod<TLAbsUpdates> {
     }
 
     public TLRequestChannelsEditAdmin(TLAbsInputChannel channel, TLAbsInputUser userId,
-            TLChannelAdminRights adminRights) {
+                                      TLAbsChannelAdminRights adminRights) {
         this.channel = channel;
         this.userId = userId;
         this.adminRights = adminRights;
@@ -67,7 +64,7 @@ public class TLRequestChannelsEditAdmin extends TLMethod<TLAbsUpdates> {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         channel = readTLObject(stream, context, TLAbsInputChannel.class, -1);
         userId = readTLObject(stream, context, TLAbsInputUser.class, -1);
-        adminRights = readTLObject(stream, context, TLChannelAdminRights.class, TLChannelAdminRights.CONSTRUCTOR_ID);
+        adminRights = readTLObject(stream, context, TLAbsChannelAdminRights.class, -1);
     }
 
     @Override
@@ -105,7 +102,7 @@ public class TLRequestChannelsEditAdmin extends TLMethod<TLAbsUpdates> {
         this.userId = userId;
     }
 
-    public TLChannelAdminRights getAdminRights() {
+    public TLAbsChannelAdminRights getAdminRights() {
         return adminRights;
     }
 
