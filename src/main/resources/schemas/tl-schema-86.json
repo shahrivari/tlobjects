@@ -12426,6 +12426,575 @@
       ],
       "type": "BotMessageMedia",
       "predicate": "botMessageMediaWebPage"
+    },
+    {
+      "id": "-1848883596",
+      "predicate": "decryptedMessage",
+      "params": [
+        {
+          "name": "flags",
+          "type": "#"
+        },
+        {
+          "name": "random_id",
+          "type": "long"
+        },
+        {
+          "name": "ttl",
+          "type": "int"
+        },
+        {
+          "name": "message",
+          "type": "string"
+        },
+        {
+          "name": "media",
+          "type": "flags.9?DecryptedMessageMedia"
+        },
+        {
+          "name": "entities",
+          "type": "flags.7?Vector<MessageEntity>"
+        },
+        {
+          "name": "via_bot_name",
+          "type": "flags.11?string"
+        },
+        {
+          "name": "reply_to_random_id",
+          "type": "flags.3?long"
+        },
+        {
+          "name": "grouped_id",
+          "type": "flags.17?long"
+        }
+      ],
+      "type": "DecryptedMessage",
+      "layer": 73
+    },
+    {
+      "id": "1930838368",
+      "predicate": "decryptedMessageService",
+      "params": [
+        {
+          "name": "random_id",
+          "type": "long"
+        },
+        {
+          "name": "action",
+          "type": "DecryptedMessageAction"
+        }
+      ],
+      "type": "DecryptedMessage",
+      "layer": 17
+    },
+    {
+      "id": "144661578",
+      "predicate": "decryptedMessageMediaEmpty",
+      "params": [],
+      "type": "DecryptedMessageMedia",
+      "layer": 8
+    },
+    {
+      "id": "-235238024",
+      "predicate": "decryptedMessageMediaPhoto",
+      "params": [
+        {
+          "name": "thumb",
+          "type": "bytes"
+        },
+        {
+          "name": "thumb_w",
+          "type": "int"
+        },
+        {
+          "name": "thumb_h",
+          "type": "int"
+        },
+        {
+          "name": "w",
+          "type": "int"
+        },
+        {
+          "name": "h",
+          "type": "int"
+        },
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "bytes"
+        },
+        {
+          "name": "iv",
+          "type": "bytes"
+        },
+        {
+          "name": "caption",
+          "type": "string"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 45
+    },
+    {
+      "id": "-1760785394",
+      "predicate": "decryptedMessageMediaVideo",
+      "params": [
+        {
+          "name": "thumb",
+          "type": "bytes"
+        },
+        {
+          "name": "thumb_w",
+          "type": "int"
+        },
+        {
+          "name": "thumb_h",
+          "type": "int"
+        },
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "mime_type",
+          "type": "string"
+        },
+        {
+          "name": "w",
+          "type": "int"
+        },
+        {
+          "name": "h",
+          "type": "int"
+        },
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "bytes"
+        },
+        {
+          "name": "iv",
+          "type": "bytes"
+        },
+        {
+          "name": "caption",
+          "type": "string"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 45
+    },
+    {
+      "id": "893913689",
+      "predicate": "decryptedMessageMediaGeoPoint",
+      "params": [
+        {
+          "name": "lat",
+          "type": "double"
+        },
+        {
+          "name": "long",
+          "type": "double"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 8
+    },
+    {
+      "id": "1485441687",
+      "predicate": "decryptedMessageMediaContact",
+      "params": [
+        {
+          "name": "phone_number",
+          "type": "string"
+        },
+        {
+          "name": "first_name",
+          "type": "string"
+        },
+        {
+          "name": "last_name",
+          "type": "string"
+        },
+        {
+          "name": "user_id",
+          "type": "int"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 8
+    },
+    {
+      "id": "-1586283796",
+      "predicate": "decryptedMessageActionSetMessageTTL",
+      "params": [
+        {
+          "name": "ttl_seconds",
+          "type": "int"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 8
+    },
+    {
+      "id": "2063502050",
+      "predicate": "decryptedMessageMediaDocument",
+      "params": [
+        {
+          "name": "thumb",
+          "type": "bytes"
+        },
+        {
+          "name": "thumb_w",
+          "type": "int"
+        },
+        {
+          "name": "thumb_h",
+          "type": "int"
+        },
+        {
+          "name": "mime_type",
+          "type": "string"
+        },
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "bytes"
+        },
+        {
+          "name": "iv",
+          "type": "bytes"
+        },
+        {
+          "name": "attributes",
+          "type": "Vector<DocumentAttribute>"
+        },
+        {
+          "name": "caption",
+          "type": "string"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 45
+    },
+    {
+      "id": "1474341323",
+      "predicate": "decryptedMessageMediaAudio",
+      "params": [
+        {
+          "name": "duration",
+          "type": "int"
+        },
+        {
+          "name": "mime_type",
+          "type": "string"
+        },
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "key",
+          "type": "bytes"
+        },
+        {
+          "name": "iv",
+          "type": "bytes"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 17
+    },
+    {
+      "id": "206520510",
+      "predicate": "decryptedMessageActionReadMessages",
+      "params": [
+        {
+          "name": "random_ids",
+          "type": "Vector<long>"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 8
+    },
+    {
+      "id": "1700872964",
+      "predicate": "decryptedMessageActionDeleteMessages",
+      "params": [
+        {
+          "name": "random_ids",
+          "type": "Vector<long>"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 8
+    },
+    {
+      "id": "-1967000459",
+      "predicate": "decryptedMessageActionScreenshotMessages",
+      "params": [
+        {
+          "name": "random_ids",
+          "type": "Vector<long>"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 8
+    },
+    {
+      "id": "1729750108",
+      "predicate": "decryptedMessageActionFlushHistory",
+      "params": [],
+      "type": "DecryptedMessageAction",
+      "layer": 8
+    },
+    {
+      "id": "467867529",
+      "predicate": "decryptedMessageLayer",
+      "params": [
+        {
+          "name": "random_bytes",
+          "type": "bytes"
+        },
+        {
+          "name": "layer",
+          "type": "int"
+        },
+        {
+          "name": "in_seq_no",
+          "type": "int"
+        },
+        {
+          "name": "out_seq_no",
+          "type": "int"
+        },
+        {
+          "name": "message",
+          "type": "DecryptedMessage"
+        }
+      ],
+      "type": "DecryptedMessageLayer",
+      "layer": 17
+    },
+    {
+      "id": "1360072880",
+      "predicate": "decryptedMessageActionResend",
+      "params": [
+        {
+          "name": "start_seq_no",
+          "type": "int"
+        },
+        {
+          "name": "end_seq_no",
+          "type": "int"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 17
+    },
+    {
+      "id": "-217806717",
+      "predicate": "decryptedMessageActionNotifyLayer",
+      "params": [
+        {
+          "name": "layer",
+          "type": "int"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 17
+    },
+    {
+      "id": "-860719551",
+      "predicate": "decryptedMessageActionTyping",
+      "params": [
+        {
+          "name": "action",
+          "type": "SendMessageAction"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 17
+    },
+    {
+      "id": "-204906213",
+      "predicate": "decryptedMessageActionRequestKey",
+      "params": [
+        {
+          "name": "exchange_id",
+          "type": "long"
+        },
+        {
+          "name": "g_a",
+          "type": "bytes"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 20
+    },
+    {
+      "id": "1877046107",
+      "predicate": "decryptedMessageActionAcceptKey",
+      "params": [
+        {
+          "name": "exchange_id",
+          "type": "long"
+        },
+        {
+          "name": "g_b",
+          "type": "bytes"
+        },
+        {
+          "name": "key_fingerprint",
+          "type": "long"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 20
+    },
+    {
+      "id": "-586814357",
+      "predicate": "decryptedMessageActionAbortKey",
+      "params": [
+        {
+          "name": "exchange_id",
+          "type": "long"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 20
+    },
+    {
+      "id": "-332526693",
+      "predicate": "decryptedMessageActionCommitKey",
+      "params": [
+        {
+          "name": "exchange_id",
+          "type": "long"
+        },
+        {
+          "name": "key_fingerprint",
+          "type": "long"
+        }
+      ],
+      "type": "DecryptedMessageAction",
+      "layer": 20
+    },
+    {
+      "id": "-1473258141",
+      "predicate": "decryptedMessageActionNoop",
+      "params": [],
+      "type": "DecryptedMessageAction",
+      "layer": 20
+    },
+    {
+      "id": "978674434",
+      "predicate": "documentAttributeStickerV55",
+      "params": [
+        {
+          "name": "alt",
+          "type": "string"
+        },
+        {
+          "name": "stickerset",
+          "type": "InputStickerSet"
+        }
+      ],
+      "type": "DocumentAttribute",
+      "layer": 45
+    },
+    {
+      "id": "-90853155",
+      "predicate": "decryptedMessageMediaExternalDocument",
+      "params": [
+        {
+          "name": "id",
+          "type": "long"
+        },
+        {
+          "name": "access_hash",
+          "type": "long"
+        },
+        {
+          "name": "date",
+          "type": "int"
+        },
+        {
+          "name": "mime_type",
+          "type": "string"
+        },
+        {
+          "name": "size",
+          "type": "int"
+        },
+        {
+          "name": "thumb",
+          "type": "PhotoSize"
+        },
+        {
+          "name": "dc_id",
+          "type": "int"
+        },
+        {
+          "name": "attributes",
+          "type": "Vector<DocumentAttribute>"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 23
+    },
+    {
+      "id": "-1978796689",
+      "predicate": "decryptedMessageMediaVenue",
+      "params": [
+        {
+          "name": "lat",
+          "type": "double"
+        },
+        {
+          "name": "long",
+          "type": "double"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "address",
+          "type": "string"
+        },
+        {
+          "name": "provider",
+          "type": "string"
+        },
+        {
+          "name": "venue_id",
+          "type": "string"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 45
+    },
+    {
+      "id": "-452652584",
+      "predicate": "decryptedMessageMediaWebPage",
+      "params": [
+        {
+          "name": "url",
+          "type": "string"
+        }
+      ],
+      "type": "DecryptedMessageMedia",
+      "layer": 45
     }
   ],
   "methods": [
