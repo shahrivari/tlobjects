@@ -36,7 +36,7 @@ public class TLMessage extends TLAbsMessage {
 
     protected TLAbsPeer toId;
 
-    protected TLMessageFwdHeader fwdFrom;
+    protected TLAbsMessageFwdHeader fwdFrom;
 
     protected Integer viaBotId;
 
@@ -66,7 +66,7 @@ public class TLMessage extends TLAbsMessage {
     }
 
     public TLMessage(boolean out, boolean mentioned, boolean mediaUnread, boolean silent,
-            boolean post, int id, Integer fromId, TLAbsPeer toId, TLMessageFwdHeader fwdFrom,
+            boolean post, int id, Integer fromId, TLAbsPeer toId, TLAbsMessageFwdHeader fwdFrom,
             Integer viaBotId, Integer replyToMsgId, int date, String message,
             TLAbsMessageMedia media, TLAbsReplyMarkup replyMarkup,
             TLVector<TLAbsMessageEntity> entities, Integer views, Integer editDate,
@@ -180,7 +180,7 @@ public class TLMessage extends TLAbsMessage {
         id = readInt(stream);
         fromId = (flags & 256) != 0 ? readInt(stream) : null;
         toId = readTLObject(stream, context, TLAbsPeer.class, -1);
-        fwdFrom = (flags & 4) != 0 ? readTLObject(stream, context, TLMessageFwdHeader.class, -1) : null;
+        fwdFrom = (flags & 4) != 0 ? readTLObject(stream, context, TLAbsMessageFwdHeader.class, -1) : null;
         viaBotId = (flags & 2048) != 0 ? readInt(stream) : null;
         replyToMsgId = (flags & 8) != 0 ? readInt(stream) : null;
         date = readInt(stream);
@@ -325,11 +325,11 @@ public class TLMessage extends TLAbsMessage {
         this.toId = toId;
     }
 
-    public TLMessageFwdHeader getFwdFrom() {
+    public TLAbsMessageFwdHeader getFwdFrom() {
         return fwdFrom;
     }
 
-    public void setFwdFrom(TLMessageFwdHeader fwdFrom) {
+    public void setFwdFrom(TLAbsMessageFwdHeader fwdFrom) {
         this.fwdFrom = fwdFrom;
     }
 
