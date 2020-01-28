@@ -1,8 +1,8 @@
 package io.objects.tl.api.request;
 
 import io.objects.tl.TLContext;
-import io.objects.tl.api.TLInputPhotoCropAutoVios;
-import io.objects.tl.api.TLInputPhotoVios;
+import io.objects.tl.api.TLInputPhoto;
+import io.objects.tl.api.TLInputPhotoCropAuto;
 import io.objects.tl.api.TLUserProfilePhoto;
 import io.objects.tl.core.TLMethod;
 import io.objects.tl.core.TLObject;
@@ -18,13 +18,13 @@ import static io.objects.tl.TLObjectUtils.SIZE_CONSTRUCTOR_ID;
 public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLUserProfilePhoto> {
     public static final int CONSTRUCTOR_ID = 0xeef579a0;
     private final String _constructor = "photos.updateProfilePhotoVios#eef579a0";
-    protected TLInputPhotoVios id;
-    protected TLInputPhotoCropAutoVios crop;
+    protected TLInputPhoto id;
+    protected TLInputPhotoCropAuto crop;
 
     public TLRequestPhotosUpdateProfilePhotoVios() {
     }
 
-    public TLRequestPhotosUpdateProfilePhotoVios(TLInputPhotoVios id, TLInputPhotoCropAutoVios crop) {
+    public TLRequestPhotosUpdateProfilePhotoVios(TLInputPhoto id, TLInputPhotoCropAuto crop) {
         this.id = id;
         this.crop = crop;
     }
@@ -52,8 +52,8 @@ public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLUserProfil
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
-        id = readTLObject(stream, context, TLInputPhotoVios.class, -1);
-        crop = readTLObject(stream, context, TLInputPhotoCropAutoVios.class, -1);
+        id = readTLObject(stream, context, TLInputPhoto.class, -1);
+        crop = readTLObject(stream, context, TLInputPhotoCropAuto.class, -1);
     }
 
     @Override
@@ -74,19 +74,19 @@ public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLUserProfil
         return CONSTRUCTOR_ID;
     }
 
-    public TLInputPhotoVios getId() {
+    public TLInputPhoto getId() {
         return id;
     }
 
-    public void setId(TLInputPhotoVios id) {
+    public void setId(TLInputPhoto id) {
         this.id = id;
     }
 
-    public TLInputPhotoCropAutoVios getCrop() {
+    public TLInputPhotoCropAuto getCrop() {
         return crop;
     }
 
-    public void setCrop(TLInputPhotoCropAutoVios crop) {
+    public void setCrop(TLInputPhotoCropAuto crop) {
         this.crop = crop;
     }
 }
