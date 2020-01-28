@@ -1,9 +1,9 @@
 package io.objects.tl.api.request;
 
 import io.objects.tl.TLContext;
-import io.objects.tl.api.TLAbsUserProfilePhoto;
 import io.objects.tl.api.TLInputPhotoCropAutoVios;
 import io.objects.tl.api.TLInputPhotoVios;
+import io.objects.tl.api.TLUserProfilePhoto;
 import io.objects.tl.core.TLMethod;
 import io.objects.tl.core.TLObject;
 
@@ -15,7 +15,7 @@ import static io.objects.tl.StreamUtils.readTLObject;
 import static io.objects.tl.StreamUtils.writeTLObject;
 import static io.objects.tl.TLObjectUtils.SIZE_CONSTRUCTOR_ID;
 
-public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLAbsUserProfilePhoto> {
+public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLUserProfilePhoto> {
     public static final int CONSTRUCTOR_ID = 0xeef579a0;
     private final String _constructor = "photos.updateProfilePhotoVios#eef579a0";
     protected TLInputPhotoVios id;
@@ -31,16 +31,16 @@ public class TLRequestPhotosUpdateProfilePhotoVios extends TLMethod<TLAbsUserPro
 
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
-    public TLAbsUserProfilePhoto deserializeResponse(InputStream stream, TLContext context) throws
+    public TLUserProfilePhoto deserializeResponse(InputStream stream, TLContext context) throws
             IOException {
         final TLObject response = readTLObject(stream, context);
         if (response == null) {
             throw new IOException("Unable to parse response");
         }
-        if (!(response instanceof TLAbsUserProfilePhoto)) {
+        if (!(response instanceof TLUserProfilePhoto)) {
             throw new IOException("Incorrect response type, expected " + getClass().getCanonicalName() + ", found " + response.getClass().getCanonicalName());
         }
-        return (TLAbsUserProfilePhoto) response;
+        return (TLUserProfilePhoto) response;
     }
 
     @Override
