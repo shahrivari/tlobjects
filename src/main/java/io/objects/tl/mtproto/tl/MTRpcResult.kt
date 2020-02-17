@@ -40,7 +40,7 @@ class MTRpcResult @JvmOverloads constructor(var messageId: Long = 0,
         fun createFrom(msgId: Long, obj: TLObject): MTRpcResult {
             val rpcResult = MTRpcResult()
             rpcResult.messageId = msgId
-            rpcResult.content = (UpdateManager.adaptTLObjects(obj) as TLObject).serialize()
+            rpcResult.content = obj.serialize()
             rpcResult.contentLen = rpcResult.content.size
             return rpcResult
         }
