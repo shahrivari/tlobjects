@@ -30,10 +30,14 @@ public class TLApiContext extends TLContext {
         return instance;
     }
 
+    public String getPackage() {
+        return "io.objects.tl";
+    }
+
     @Override
     public void init() {
         HashMap<Integer, Class<? extends TLObject>> map = new HashMap<>();
-        String pkg = "io.objects.tl";
+        String pkg = getPackage();
 
         try (ScanResult scanResult = new ClassGraph()
                 // .verbose()
