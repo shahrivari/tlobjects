@@ -22,7 +22,7 @@ public class TLApiContext extends TLContext {
     private final static Logger logger = LoggerFactory.getLogger(TLApiContext.class);
     private static TLApiContext instance;
 
-    private TLApiContext() {
+    protected TLApiContext() {
         super(665);
     }
 
