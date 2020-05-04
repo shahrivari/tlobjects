@@ -43,6 +43,10 @@ public abstract class TLContext {
 
     protected abstract void init();
 
+    public int getSize() {
+        return registeredClasses.size();
+    }
+
     public final boolean isSupportedObject(TLObject object) {
         return isSupportedObject(object.getConstructorId());
     }

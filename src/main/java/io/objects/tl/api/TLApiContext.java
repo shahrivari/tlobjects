@@ -8,6 +8,8 @@ import io.objects.tl.api.help.TLGetTermsOfServiceUpdate;
 import io.objects.tl.core.*;
 import io.objects.tl.mtproto.tl.MTInvokeAfter;
 import io.objects.tl.mtproto.tl.MTMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -17,32 +19,32 @@ import java.util.HashMap;
  */
 @SuppressWarnings("unused")
 public class TLApiContext extends TLContext {
+    private final static Logger logger = LoggerFactory.getLogger(TLApiContext.class);
     private static TLApiContext instance;
 
-    public TLApiContext() {
+    private TLApiContext() {
         super(665);
     }
 
     public static TLApiContext getInstance() {
-        if (instance == null) {
+        if (instance == null)
             instance = new TLApiContext();
-        }
+
         return instance;
     }
 
-    public String getPackage() {
-        return "io.objects.tl";
+    protected String[] getPackages() {
+        return new String[]{"io.objects.tl"};
     }
 
     @Override
     public void init() {
         HashMap<Integer, Class<? extends TLObject>> map = new HashMap<>();
-        String pkg = getPackage();
 
         try (ScanResult scanResult = new ClassGraph()
                 // .verbose()
                 // .enableAllInfo()
-                .whitelistPackages(pkg)
+                .whitelistPackages(getPackages())
                 .ignoreMethodVisibility()
                 .ignoreParentClassLoaders()
                 .ignoreClassVisibility()
@@ -61,18 +63,21 @@ public class TLApiContext extends TLContext {
 
                 int constructorId;
                 try {
-                    constructorId = (int) tlClass.getField("CONSTRUCTOR_ID").get(null);
+                    constructorId = tlClass.newInstance().getConstructorId();
                     if (map.containsKey(constructorId))
-                        throw new IllegalStateException(String.format("%s == %s", tlClass.getName(), map.get(constructorId).getName()));
+                        throw new IllegalStateException(String.format("TLObject %s has the same constructorId as %s.", tlClass.getName(), map.get(constructorId).getName()));
                     else
                         map.put(constructorId, tlClass);
 
                     registerClass(constructorId, tlClass);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    e.printStackTrace();
-                    System.err.println(tlClass.getName());
+                } catch (IllegalStateException e) {
+                    logger.error("Error in registering TLObject {}. {}", tlClass.getSimpleName(), e.getMessage());
+                } catch (Exception e) {
+                    logger.warn("TLObject {} cannot be instantiated or its default constructor is not accessible.", tlClass.getSimpleName());
                 }
             }
+
+            logger.info("{} TLObjects registered in TLContext.", getSize());
         }
     }
 }
