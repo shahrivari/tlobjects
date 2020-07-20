@@ -72,8 +72,10 @@ public class TLApiContext extends TLContext {
                     registerClass(constructorId, tlClass);
                 } catch (IllegalStateException e) {
                     logger.error("Error in registering TLObject {}. {}", tlClass.getSimpleName(), e.getMessage());
+                    throw e;
                 } catch (Exception e) {
-                    logger.warn("TLObject {} cannot be instantiated or its default constructor is not accessible.", tlClass.getSimpleName());
+                    logger.error("TLObject {} cannot be instantiated or its default constructor is not accessible.", tlClass.getSimpleName());
+                    throw new IllegalStateException(String.format("TLObject %s cannot be instantiated or its default constructor is not accessible.", tlClass.getSimpleName()));
                 }
             }
 
