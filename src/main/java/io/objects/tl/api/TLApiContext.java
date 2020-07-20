@@ -37,6 +37,10 @@ public class TLApiContext extends TLContext {
         return new String[]{"io.objects.tl"};
     }
 
+    protected <T extends TLObject> boolean classPredicate(Class<T> clazz) {
+        return true;
+    }
+
     @Override
     public void init() {
         HashMap<Integer, Class<? extends TLObject>> map = new HashMap<>();
@@ -55,10 +59,17 @@ public class TLApiContext extends TLContext {
             for (ClassInfo info : scanResult.getSubclasses("io.objects.tl.core.TLObject")) {
                 Class<? extends TLObject> tlClass = (Class<? extends TLObject>) info.loadClass();
 
-                if (Modifier.isAbstract(tlClass.getModifiers()) || TLBool.class.isAssignableFrom(tlClass)
-                        || tlClass == MTInvokeAfter.class || tlClass == TLGetTermsOfServiceUpdate.class
-                        || tlClass == MTMessage.class || tlClass == TLIntVector.class
-                        || tlClass == TLLongVector.class || tlClass == TLStringVector.class)
+                if (Modifier.isAbstract(tlClass.getModifiers()) ||
+                        TLBool.class.isAssignableFrom(tlClass)
+                        || tlClass == MTInvokeAfter.class
+                        || tlClass == TLGetTermsOfServiceUpdate.class
+                        || tlClass == MTMessage.class
+                        || tlClass == TLIntVector.class
+                        || tlClass == TLLongVector.class
+                        || tlClass == TLStringVector.class)
+                    continue;
+
+                if (!classPredicate(tlClass))
                     continue;
 
                 int constructorId;
