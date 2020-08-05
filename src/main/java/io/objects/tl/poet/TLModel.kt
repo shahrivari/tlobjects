@@ -47,7 +47,7 @@ class TLTypeConditional(val value: Int, val realType: TLType) : TLType() {
     override fun serializable() =
             !(realType is TLTypeRaw && realType.name.equals("true", true))
 
-    override fun toString() = "flag.$value?$realType"
+    override fun toString() = "avg.$value?$realType"
     override fun equals(other: Any?) =
             other is TLTypeConditional && other.value == value && other.realType == realType
 
