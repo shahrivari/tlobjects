@@ -1,18 +1,25 @@
 package io.objects.tl.core
 
-import java.util.*
 import kotlin.reflect.KMutableProperty0
-import kotlin.reflect.KProperty
 
-class TLBuilder {
-    val map = HashMap<KProperty<*>, Boolean>()
+open class TLBuilder protected constructor(val list: MutableList<KMutableProperty0<Any>>) {
 
-    fun withProperty(name: KMutableProperty0<*>, isNullable: Boolean = false): TLBuilder {
-        map[name] = isNullable
-        return this
+    companion object {
+        fun generateSerializer(): PropertyBuilder = PropertyBuilder()
     }
 
-    fun build(): TLBuilder {
-        return this
+    class PropertyBuilder {
+        private val list = mutableListOf<KMutableProperty0<*>>()
+
+        fun withProperty(property: KMutableProperty0<*>): PropertyBuilder {
+            list.add(property)
+            return this
+        }
+
+        fun build(): TLBuilder {
+            val list2 = mutableListOf<KMutableProperty0<Any>>()
+            list.forEach { list2.add(it as KMutableProperty0<Any>) }
+            return  TLBuilder(list2)
+        }
     }
 }

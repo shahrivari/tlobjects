@@ -1,13 +1,11 @@
 package io.objects.tl.core
 
+import io.objects.tl.StreamUtils.*
 import io.objects.tl.TLContext
 import io.objects.tl.TLObjectUtils
 import io.objects.tl.exception.InvalidConstructorIdException
-
 import java.io.*
-
-import io.objects.tl.StreamUtils.readInt
-import io.objects.tl.StreamUtils.writeInt
+import kotlin.reflect.full.valueParameters
 
 /**
  * Basic class for all tl-objects. Contains method for serializing and deserializing object.
@@ -19,11 +17,11 @@ import io.objects.tl.StreamUtils.writeInt
  * @see [http://github.com/badoualy/kotlogram](http://github.com/badoualy/kotlogram)
  */
 abstract class TLObject : Serializable {
+    protected var builder: TLBuilder? = null
 
     /**
      * @return the constructor id represented by this class
      */
-
     abstract fun getConstructorId(): Int
 
     /**
@@ -49,6 +47,30 @@ abstract class TLObject : Serializable {
     fun serialize(stream: OutputStream) {
         writeInt(getConstructorId(), stream)
         serializeBody(stream)
+
+        builder?.let {
+            it.list.forEach {
+                with(it) {
+                    println("$name ${get()}")
+                }
+            }
+
+            it.list.forEach {
+                val value = it.get()
+                val name = it.name
+                val type = it.returnType.toString().split(".").last()
+                val last = type.toCharArray().last().toString()
+                val isNullable = last == "?"
+
+                if (type.contains("Int"))
+                    writeInt(value as Int, stream)
+
+                if (type.contains("String"))
+                    writeString(value as String, stream)
+
+//                println("$name == $value == $type == $last == $isNullable \n")
+            }
+        }
     }
 
     /**
@@ -86,7 +108,22 @@ abstract class TLObject : Serializable {
      */
     @Throws(IOException::class)
     open fun deserializeBody(stream: InputStream, context: TLContext) {
+        println("=================================")
+        builder?.let {
+            it.list.forEach {
+                val type = it.returnType.toString().split(".").last()
+                val last = type.toCharArray().last().toString()
+                val isNullable = last == "?"
 
+                if (type.contains("Int"))
+                    it.set(readInt(stream))
+
+                if (type.contains("String"))
+                    it.set(readTLString(stream))
+
+//                println("$name == $value == $type == $last == $isNullable \n")
+            }
+        }
     }
 
     /**
