@@ -2,7 +2,7 @@ package io.objects.tl.core
 
 import kotlin.reflect.KMutableProperty0
 
-open class TLBuilder protected constructor(val list: MutableList<KMutableProperty0<Any>>) {
+open class TLBuilder protected constructor(val list: MutableList<KMutableProperty0<Any?>>) {
 
     companion object {
         fun generateSerializer(): PropertyBuilder = PropertyBuilder()
@@ -17,8 +17,8 @@ open class TLBuilder protected constructor(val list: MutableList<KMutablePropert
         }
 
         fun build(): TLBuilder {
-            val list2 = mutableListOf<KMutableProperty0<Any>>()
-            list.forEach { list2.add(it as KMutableProperty0<Any>) }
+            val list2 = mutableListOf<KMutableProperty0<Any?>>()
+            list.forEach { list2.add(it as KMutableProperty0<Any?>) }
             return  TLBuilder(list2)
         }
     }

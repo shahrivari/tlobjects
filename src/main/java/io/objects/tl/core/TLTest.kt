@@ -9,13 +9,13 @@ class TLTest : TLObject {
     var name: String = ""
     var age: Int = 0
     var avg: Int? = null
-    var list: TLIntVector = TLIntVector()
+    var list: TLVector<TLBool>? = null
     var a: Boolean = false
     var b: Double = 0.0
 
     constructor()
 
-    constructor(name: String, age: Int, avg: Int?, list: TLIntVector, a: Boolean, b: Double) {
+    constructor(name: String, age: Int, avg: Int?, list: TLVector<TLBool>, a: Boolean, b: Double) {
         this.name = name
         this.age = age
         this.avg = avg
