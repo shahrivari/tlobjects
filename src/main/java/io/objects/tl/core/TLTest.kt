@@ -1,8 +1,5 @@
 package io.objects.tl.core
 
-import io.objects.tl.StreamUtils
-import io.objects.tl.StreamUtils.readInt
-import io.objects.tl.StreamUtils.readTLString
 import io.objects.tl.TLContext
 import java.io.IOException
 import java.io.InputStream
@@ -12,13 +9,19 @@ class TLTest : TLObject {
     var name: String = ""
     var age: Int = 0
     var avg: Int? = null
+    var list: TLIntVector = TLIntVector()
+    var a: Boolean = false
+    var b: Double = 0.0
 
     constructor()
 
-    constructor(name: String, age: Int, avg: Int?) {
+    constructor(name: String, age: Int, avg: Int?, list: TLIntVector, a: Boolean, b: Double) {
         this.name = name
         this.age = age
         this.avg = avg
+        this.list = list
+        this.a = a
+        this.b = b
     }
 
     @Throws(IOException::class)
@@ -27,6 +30,9 @@ class TLTest : TLObject {
                 .withProperty(::name)
                 .withProperty(::age)
                 .withProperty(::avg)
+                .withProperty(::list)
+                .withProperty(::a)
+                .withProperty(::b)
                 .build()
     }
 
@@ -35,6 +41,9 @@ class TLTest : TLObject {
                 .withProperty(::name)
                 .withProperty(::age)
                 .withProperty(::avg)
+                .withProperty(::list)
+                .withProperty(::a)
+                .withProperty(::b)
                 .build()
         super.deserializeBody(stream, context)
     }

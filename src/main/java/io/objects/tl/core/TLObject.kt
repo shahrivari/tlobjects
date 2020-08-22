@@ -5,7 +5,6 @@ import io.objects.tl.TLContext
 import io.objects.tl.TLObjectUtils
 import io.objects.tl.exception.InvalidConstructorIdException
 import java.io.*
-import kotlin.reflect.full.valueParameters
 
 /**
  * Basic class for all tl-objects. Contains method for serializing and deserializing object.
@@ -58,17 +57,20 @@ abstract class TLObject : Serializable {
             it.list.forEach {
                 val value = it.get()
                 val name = it.name
-                val type = it.returnType.toString().split(".").last()
+                var type = it.returnType.toString().split(".").last()
                 val last = type.toCharArray().last().toString()
                 val isNullable = last == "?"
+                if (last == "?") type = type.substring(0, type.lastIndex)
 
-                if (type.contains("Int"))
-                    writeInt(value as Int, stream)
-
-                if (type.contains("String"))
-                    writeString(value as String, stream)
-
-//                println("$name == $value == $type == $last == $isNullable \n")
+                when {
+                    type.contentEquals("String") -> writeString(value as String, stream)
+                    type.contentEquals("Int") -> writeInt(value as Int, stream)
+                    type.contentEquals("Boolean") -> writeBoolean(value as Boolean, stream)
+                    type.contentEquals("TLIntVector") -> writeTLVector(value as TLIntVector, stream)
+                    type.contentEquals("Double") -> writeDouble(value as Double, stream)
+                    type.contentEquals("TLVector") -> writeTLVector(value as TLVector<*>, stream)
+                }
+//                    println("$name == $value == $type == $last == $isNullable \n")
             }
         }
     }
@@ -111,17 +113,21 @@ abstract class TLObject : Serializable {
         println("=================================")
         builder?.let {
             it.list.forEach {
-                val type = it.returnType.toString().split(".").last()
+                var type = it.returnType.toString().split(".").last()
                 val last = type.toCharArray().last().toString()
                 val isNullable = last == "?"
+                if (last == "?") type = type.substring(0, type.lastIndex)
 
-                if (type.contains("Int"))
-                    it.set(readInt(stream))
+                when {
+                    type.contentEquals("String") -> it.set(readTLString(stream))
+                    type.contentEquals("Int") -> it.set(readInt(stream))
+                    type.contentEquals("Boolean") -> it.set(readTLBool(stream))
+                    type.contentEquals("TLIntVector") -> it.set(readTLIntVector(stream, context))
+                    type.contentEquals("Double") -> it.set(readDouble(stream))
+                    type.contentEquals("TLVector") -> it.set(readTLVector(stream, context))
+                }
 
-                if (type.contains("String"))
-                    it.set(readTLString(stream))
-
-//                println("$name == $value == $type == $last == $isNullable \n")
+                    // println("${it.name}  $type == $last == $isNullable \n")
             }
         }
     }
