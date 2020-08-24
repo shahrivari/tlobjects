@@ -5,6 +5,7 @@ import io.objects.tl.TLContext
 import io.objects.tl.TLObjectUtils
 import io.objects.tl.exception.InvalidConstructorIdException
 import java.io.*
+import kotlin.reflect.KMutableProperty0
 
 /**
  * Basic class for all tl-objects. Contains method for serializing and deserializing object.
@@ -48,86 +49,72 @@ abstract class TLObject : Serializable {
         serializeBody(stream)
 
         builder?.let {
-            val isNeededFlag = it.list.map {
-                val type = it.returnType.toString().split(".").last().toCharArray()
-                type.last().toString() == "?"
-            }.contains(true)
+            if (isFlagNeeded(it))
+                writeInt(computeFlags(it), stream)
 
-            if (isNeededFlag) {
-                var flags = 0
-                var c = 1
+            it.list.forEach { serializeFields(it, stream) }
+        } ?: TODO("should serialize normally")
+    }
 
-                // update flags
-                it.list.forEach {
-                    val type = it.returnType.toString().split(".").last().toCharArray()
-                    val isNullable = type.last().toString() == "?"
-
-                    if (isNullable) {
-                        flags = it.get()?.let { flags or c } ?: flags and c.inv()
-                        c *= 2
-                    }
-                }
-
-                writeInt(flags, stream)
-
-                // write
-                it.list.forEach {
-                    val value = it.get()
-                    val name = it.name
-                    var type = it.returnType.toString().split(".").last()
-                    val last = type.toCharArray().last().toString()
-                    val isNullable = last == "?"
-                    if (last == "?") type = type.substring(0, type.lastIndex)
-
-                    when {
-                        type.contentEquals("String") -> it.get()?.let {
-                            writeString(it as String, stream)
-                        }
-
-                        type.contentEquals("Int") -> it.get()?.let {
-                            writeInt(it as Int, stream)
-                        }
-
-                        type.contentEquals("Boolean") -> it.get()?.let {
-                            writeBoolean(it as Boolean, stream)
-                        }
-
-                        type.contentEquals("TLIntVector") -> it.get()?.let {
-                            writeTLVector(it as TLVector<*>, stream)
-                        }
-
-                        type.contentEquals("Double") -> it.get()?.let {
-                            writeDouble(it as Double, stream)
-                        }
-
-                        type.contentEquals("TLVector") -> it.get()?.let {
-                            writeTLVector(it as TLVector<*>, stream)
-                        }
-                    }
-                }
-
-            } else {
-                it.list.forEach {
-                    val value = it.get()
-                    val name = it.name
-                    var type = it.returnType.toString().split(".").last()
-                    val last = type.toCharArray().last().toString()
-                    val isNullable = last == "?"
-                    if (last == "?") type = type.substring(0, type.lastIndex)
-                    when {
-                        type.contentEquals("String") -> writeString(value as String, stream)
-                        type.contentEquals("Int") -> writeInt(value as Int, stream)
-                        type.contentEquals("Boolean") -> writeBoolean(value as Boolean, stream)
-                        type.contentEquals("TLIntVector") -> writeTLVector(value as TLIntVector,
-                                                                           stream)
-                        type.contentEquals("Double") -> writeDouble(value as Double, stream)
-                        type.contentEquals("TLVector") -> writeTLVector(value as TLVector<*>,
-                                                                        stream)
-                    }
-                }
+    private fun serializeFields(it: KMutableProperty0<Any?>, stream: OutputStream) {
+        val value = it.get()
+        when (getAbsoluteType(it)) {
+            "String" -> value?.let { writeString(it as String, stream) }
+            "Int" -> value?.let { writeInt(it as Int, stream) }
+            "Boolean" -> value?.let { writeBoolean(it as Boolean, stream) }
+            "TLIntVector" -> value?.let { writeTLVector(it as TLIntVector, stream) }
+            "Double" -> value?.let { writeDouble(it as Double, stream) }
+            "TLVector" -> value?.let { writeTLVector(it as TLVector<*>, stream) }
+            "TLLongVector" -> value?.let { writeTLVector(it as TLLongVector, stream) }
+            "Byte" -> value?.let { writeByte(it as Byte, stream) }
+            "ByteArray" -> value?.let { writeByteArray(it as ByteArray, stream) }
+            "TLBytes" -> value?.let { writeTLBytes(it as TLBytes, stream) }
+            "TLObject" -> value?.let { writeTLObject(it as TLObject, stream) }
+            "TLStringVector" -> value?.let {
+                writeTLVector(it as TLStringVector, stream)
             }
         }
     }
+
+    private fun computeFlags(it: TLBuilder): Int {
+        var flags = 0
+        var c = 1
+
+        it.list.forEach {
+            val isNullable = isNullable(it)
+
+            if (isNullable) {
+                flags = it.get()?.let { flags or c } ?: flags and c.inv()
+                c *= 2
+            }
+        }
+
+        return flags
+    }
+
+    private fun getAbsoluteType(it: KMutableProperty0<Any?>): String {
+        var type = getType(it)
+        val last = getLastCharacter(it)
+        if (last == "?") type = type.substring(0, type.lastIndex)
+        if (type.toCharArray().last().toString() == ">")
+            type = "TLVector"
+        return type
+    }
+
+    private fun isFlagNeeded(it: TLBuilder): Boolean =
+            it.list.map { isNullable(it) }.contains(true)
+
+    private fun isNullable(it: KMutableProperty0<Any?>): Boolean =
+            getLastCharacter(it) == "?"
+
+    private fun getLastCharacter(it: KMutableProperty0<Any?>) =
+            gerReturnType(it).toCharArray().last().toString()
+
+    private fun getType(it: KMutableProperty0<Any?>): String =
+            gerReturnType(it).split(".").last()
+
+    private fun gerReturnType(it: KMutableProperty0<Any?>) =
+            it.returnType.toString()
 
     /**
      * Deserialize object from stream and current TLContext
@@ -164,93 +151,139 @@ abstract class TLObject : Serializable {
      */
     @Throws(IOException::class)
     open fun deserializeBody(stream: InputStream, context: TLContext) {
-        println("=================================")
         builder?.let {
-
-            val isNeededFlag = it.list.map {
-                val type = it.returnType.toString().split(".").last().toCharArray()
-                type.last().toString() == "?"
-            }.contains(true)
+            val isNeededFlag = isFlagNeeded(it)
 
             if (isNeededFlag) {
                 val flags = readInt(stream)
                 var c = 1
 
                 it.list.forEach {
-                    var type = it.returnType.toString().split(".").last()
-                    val last = type.toCharArray().last().toString()
-                    val isNullable = last == "?"
-                    if (last == "?") type = type.substring(0, type.lastIndex)
+                    val type = getAbsoluteType(it)
+                    val isNullable = isNullable(it)
 
-                    val name = it.name
-
-                    when {
-                        type.contentEquals("String") -> {
-                            if (isNullable) {
-                                val value = if ((flags and c) != 0) readTLString(stream) else null
+                    if (isNullable) {
+                        when (type) {
+                            "String" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLString(stream) else null
                                 it.set(value)
                                 c *= 2
-                            } else it.set(readTLString(stream))
-                        }
-                        type.contentEquals("Int") -> {
-                            if (isNullable) {
+                            }
+
+                            "Int" -> {
                                 val value = if ((flags and c) != 0) readInt(stream) else null
                                 it.set(value)
                                 c *= 2
-                            } else it.set(readInt(stream))
-                        }
-                        type.contentEquals("Boolean") -> {
-                            if (isNullable) {
-                                val value = if ((flags and c) != 0) readTLBool(stream) else null
-                                it.set(value)
-                                c *= 2
-                            } else it.set(readTLBool(stream))
-                        }
-                        type.contentEquals("TLIntVector") -> {
-                            if (isNullable) {
-                                val value = if ((flags and c) != 0) readTLVector(stream,
-                                                                                 context) else null
-                                it.set(value)
-                                c *= 2
-                            } else it.set(readTLVector(stream, context))
-                        }
-                        type.contentEquals("Double") -> {
-                            if (isNullable) {
-                                val value = if ((flags and c) != 0) readDouble(stream) else null
-                                it.set(value)
-                                c *= 2
-                            } else it.set(readDouble(stream))
-                        }
-                        type.contentEquals("TLVector") -> {
-                            if (isNullable) {
-                                val value = if ((flags and c) != 0) readTLVector(stream,
-                                                                                 context) else null
-                                it.set(value)
-                                c *= 2
-                            } else it.set(readTLVector(stream, context))
-                        }
-                    }
-                }
-            } else {
-                it.list.forEach {
-                    var type = it.returnType.toString().split(".").last()
-                    val last = type.toCharArray().last().toString()
-                    val isNullable = last == "?"
-                    if (last == "?") type = type.substring(0, type.lastIndex)
+                            }
 
-                    when {
-                        type.contentEquals("String") -> it.set(readTLString(stream))
-                        type.contentEquals("Int") -> it.set(readInt(stream))
-                        type.contentEquals("Boolean") -> it.set(readTLBool(stream))
-                        type.contentEquals("TLIntVector") -> it.set(
-                                readTLIntVector(stream, context))
-                        type.contentEquals("Double") -> it.set(readDouble(stream))
-                        type.contentEquals("TLVector") -> it.set(readTLVector(stream, context))
-                    }
+                            "Boolean" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLBool(stream) else null
+                                it.set(value)
+                                c *= 2
+                            }
 
-                    // println("${it.name}  $type == $last == $isNullable \n")
+                            "TLBool" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLBool(stream) else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLIntVector" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLIntVector(stream, context)
+                                        else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "Double" -> {
+                                val value =
+                                        if ((flags and c) != 0) readDouble(stream) else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLVector" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLVector(stream, context)
+                                        else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLLongVector" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLLongVector(stream, context)
+                                        else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLStringVector" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLStringVector(stream, context)
+                                        else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "Byte" -> {
+                                val value =
+                                        if ((flags and c) != 0) readByte(stream).toByte() else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "ByteArray" -> {
+                                val value =
+                                        if ((flags and c) != 0) readByteArray(stream) else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLBytes" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLBytes(stream) else null
+                                it.set(value)
+                                c *= 2
+                            }
+
+                            "TLObject" -> {
+                                val value =
+                                        if ((flags and c) != 0) readTLObject(stream, context)
+                                        else null
+                                it.set(value)
+                                c *= 2
+                            }
+                        }
+                    } else
+                        deserializeNonNullable(type, stream, it, context)
                 }
-            }
+            } else
+                it.list.forEach { deserializeNonNullable(getAbsoluteType(it), stream, it, context) }
+        }
+    }
+
+    private fun deserializeNonNullable(type: String,
+                                       stream: InputStream,
+                                       it: KMutableProperty0<Any?>,
+                                       context: TLContext) {
+        when (type) {
+            "String" -> it.set(readTLString(stream))
+            "Int" -> it.set(readInt(stream))
+            "Boolean" -> it.set(readTLBool(stream))
+            "TLIntVector" -> it.set(readTLIntVector(stream, context))
+            "Double" -> it.set(readDouble(stream))
+            "TLVector" -> it.set(readTLVector(stream, context))
+            "TLLongVector" -> it.set(readTLLongVector(stream, context))
+            "TLStringVector" -> it.set(readTLStringVector(stream, context))
+            "Byte" -> it.set(readByte(stream))
+            "TLBytes" -> it.set(readTLBytes(stream, context))
+            "ByteArray" -> it.set(readByteArray(stream))
+            "TLObject" -> it.set(readTLObject(stream, context))
         }
     }
 
