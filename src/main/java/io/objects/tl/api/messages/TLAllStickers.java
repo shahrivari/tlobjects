@@ -4,7 +4,7 @@ import static io.objects.tl.StreamUtils.*;
 import static io.objects.tl.TLObjectUtils.*;
 
 import io.objects.tl.TLContext;
-import io.objects.tl.api.TLStickerSet;
+import io.objects.tl.api.TLAbsStickerSet;
 import io.objects.tl.core.TLVector;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,14 +21,14 @@ public class TLAllStickers extends TLAbsAllStickers {
 
     protected int hash;
 
-    protected TLVector<TLStickerSet> sets;
+    protected TLVector<TLAbsStickerSet> sets;
 
     private final String _constructor = "messages.allStickers#edfd405f";
 
     public TLAllStickers() {
     }
 
-    public TLAllStickers(int hash, TLVector<TLStickerSet> sets) {
+    public TLAllStickers(int hash, TLVector<TLAbsStickerSet> sets) {
         this.hash = hash;
         this.sets = sets;
     }
@@ -72,11 +72,11 @@ public class TLAllStickers extends TLAbsAllStickers {
         this.hash = hash;
     }
 
-    public TLVector<TLStickerSet> getSets() {
+    public TLVector<TLAbsStickerSet> getSets() {
         return sets;
     }
 
-    public void setSets(TLVector<TLStickerSet> sets) {
+    public void setSets(TLVector<TLAbsStickerSet> sets) {
         this.sets = sets;
     }
 }

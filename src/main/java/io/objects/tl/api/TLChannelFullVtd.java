@@ -52,7 +52,7 @@ public class TLChannelFullVtd extends TLChannelFull {
 
     protected Integer pinnedMsgId;
 
-    protected TLStickerSet stickerset;
+    protected TLAbsStickerSet stickerset;
 
     protected Integer availableMinId;
 
@@ -68,7 +68,7 @@ public class TLChannelFullVtd extends TLChannelFull {
                             TLAbsPhoto chatPhoto, TLPeerNotifySettings notifySettings,
                             TLAbsExportedChatInvite exportedInvite, TLVector<TLBotInfo> botInfo,
                             Integer migratedFromChatId, Integer migratedFromMaxId, Integer pinnedMsgId,
-                            TLStickerSet stickerset, Integer availableMinId) {
+                            TLAbsStickerSet stickerset, Integer availableMinId) {
         this.canViewParticipants = canViewParticipants;
         this.canSetUsername = canSetUsername;
         this.canSetStickers = canSetStickers;
@@ -186,7 +186,7 @@ public class TLChannelFullVtd extends TLChannelFull {
         migratedFromChatId = (flags & 16) != 0 ? readInt(stream) : null;
         migratedFromMaxId = (flags & 16) != 0 ? readInt(stream) : null;
         pinnedMsgId = (flags & 32) != 0 ? readInt(stream) : null;
-        stickerset = (flags & 256) != 0 ? readTLObject(stream, context, TLStickerSet.class, TLStickerSet.CONSTRUCTOR_ID) : null;
+        stickerset = (flags & 256) != 0 ? readTLObject(stream, context, TLAbsStickerSet.class, -1) : null;
         availableMinId = (flags & 512) != 0 ? readInt(stream) : null;
     }
 
@@ -414,11 +414,11 @@ public class TLChannelFullVtd extends TLChannelFull {
         this.pinnedMsgId = pinnedMsgId;
     }
 
-    public TLStickerSet getStickerset() {
+    public TLAbsStickerSet getStickerset() {
         return stickerset;
     }
 
-    public void setStickerset(TLStickerSet stickerset) {
+    public void setStickerset(TLAbsStickerSet stickerset) {
         this.stickerset = stickerset;
     }
 
