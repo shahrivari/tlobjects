@@ -134,7 +134,7 @@ public class TLStickerSetVtd extends TLObject {
         size += SIZE_INT32;
         size += SIZE_INT32;
         if ((flags & 16) != 0) {
-            if (thumb == null) throwNullFieldException("installedDate", flags);
+            if (thumb == null) throwNullFieldException("thumb", flags);
             size += thumb.computeSerializedSize();
             size += SIZE_INT32;
         }
