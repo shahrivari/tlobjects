@@ -24,7 +24,7 @@ public class TLStickerSetCovered extends TLAbsStickerSetCovered {
     public TLStickerSetCovered() {
     }
 
-    public TLStickerSetCovered(TLStickerSet set, TLAbsDocument cover) {
+    public TLStickerSetCovered(TLAbsStickerSet set, TLAbsDocument cover) {
         this.set = set;
         this.cover = cover;
     }
@@ -38,7 +38,7 @@ public class TLStickerSetCovered extends TLAbsStickerSetCovered {
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
-        set = readTLObject(stream, context, TLStickerSet.class, TLStickerSet.CONSTRUCTOR_ID);
+        set = readTLObject(stream, context, TLAbsStickerSet.class, -1);
         cover = readTLObject(stream, context, TLAbsDocument.class, -1);
     }
 
@@ -60,11 +60,11 @@ public class TLStickerSetCovered extends TLAbsStickerSetCovered {
         return CONSTRUCTOR_ID;
     }
 
-    public TLStickerSet getSet() {
+    public TLAbsStickerSet getSet() {
         return set;
     }
 
-    public void setSet(TLStickerSet set) {
+    public void setSet(TLAbsStickerSet set) {
         this.set = set;
     }
 

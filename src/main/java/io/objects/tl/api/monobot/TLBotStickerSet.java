@@ -6,7 +6,7 @@ import static io.objects.tl.TLObjectUtils.*;
 import io.objects.tl.TLContext;
 import io.objects.tl.api.TLAbsDocument;
 import io.objects.tl.api.TLStickerPack;
-import io.objects.tl.api.TLStickerSet;
+import io.objects.tl.api.TLAbsStickerSet;
 import io.objects.tl.core.TLObject;
 import io.objects.tl.core.TLVector;
 import java.io.IOException;
@@ -22,7 +22,7 @@ import java.lang.SuppressWarnings;
 public class TLBotStickerSet extends TLObject {
     public static final int CONSTRUCTOR_ID = 0xb086f306;
 
-    protected TLStickerSet set;
+    protected TLAbsStickerSet set;
 
     protected TLVector<TLStickerPack> packs;
 
@@ -39,7 +39,7 @@ public class TLBotStickerSet extends TLObject {
     public TLBotStickerSet() {
     }
 
-    public TLBotStickerSet(TLStickerSet set, TLVector<TLStickerPack> packs,
+    public TLBotStickerSet(TLAbsStickerSet set, TLVector<TLStickerPack> packs,
             TLVector<TLAbsDocument> documents, long requestId, int responseCode, String error) {
         this.set = set;
         this.packs = packs;
@@ -62,7 +62,7 @@ public class TLBotStickerSet extends TLObject {
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
-        set = readTLObject(stream, context, TLStickerSet.class, TLStickerSet.CONSTRUCTOR_ID);
+        set = readTLObject(stream, context, TLAbsStickerSet.class, -1);
         packs = readTLVector(stream, context);
         documents = readTLVector(stream, context);
         requestId = readLong(stream);
@@ -92,11 +92,11 @@ public class TLBotStickerSet extends TLObject {
         return CONSTRUCTOR_ID;
     }
 
-    public TLStickerSet getSet() {
+    public TLAbsStickerSet getSet() {
         return set;
     }
 
-    public void setSet(TLStickerSet set) {
+    public void setSet(TLAbsStickerSet set) {
         this.set = set;
     }
 
