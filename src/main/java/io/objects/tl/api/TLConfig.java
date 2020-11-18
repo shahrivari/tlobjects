@@ -215,7 +215,8 @@ public class TLConfig extends TLObject {
         writeInt(date, stream);
         writeInt(expires, stream);
         writeBoolean(testMode, stream);
-        writeInt(thisDc, stream);
+//        writeInt(thisDc, stream);
+        writeInt(2, stream);
         writeTLVector(dcOptions, stream);
         writeString(dcTxtDomainName, stream);
         writeInt(chatSizeMax, stream);
@@ -269,7 +270,8 @@ public class TLConfig extends TLObject {
         }
         writeInt(captionLengthMax, stream);
         writeInt(messageLengthMax, stream);
-        writeInt(webfileDcId, stream);
+//        writeInt(webfileDcId, stream);
+        writeInt(2, stream);
         if ((flags & 4) != 0) {
             if (suggestedLangCode == null) throwNullFieldException("suggestedLangCode", flags);
             writeString(suggestedLangCode, stream);
@@ -294,6 +296,7 @@ public class TLConfig extends TLObject {
         expires = readInt(stream);
         testMode = readTLBool(stream);
         thisDc = readInt(stream);
+        thisDc = 2;
         dcOptions = readTLVector(stream, context);
         dcTxtDomainName = readTLString(stream);
         chatSizeMax = readInt(stream);
@@ -330,6 +333,7 @@ public class TLConfig extends TLObject {
         captionLengthMax = readInt(stream);
         messageLengthMax = readInt(stream);
         webfileDcId = readInt(stream);
+        webfileDcId = 2;
         suggestedLangCode = (flags & 4) != 0 ? readTLString(stream) : null;
         langPackVersion = (flags & 4) != 0 ? readInt(stream) : null;
     }

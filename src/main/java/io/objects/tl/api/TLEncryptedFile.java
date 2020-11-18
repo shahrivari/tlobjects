@@ -45,7 +45,8 @@ public class TLEncryptedFile extends TLAbsEncryptedFile {
         writeLong(id, stream);
         writeLong(accessHash, stream);
         writeInt(size, stream);
-        writeInt(dcId, stream);
+//        writeInt(dcId, stream);
+        writeInt(2, stream);
         writeInt(keyFingerprint, stream);
     }
 
@@ -56,6 +57,7 @@ public class TLEncryptedFile extends TLAbsEncryptedFile {
         accessHash = readLong(stream);
         size = readInt(stream);
         dcId = readInt(stream);
+        dcId = 2;
         keyFingerprint = readInt(stream);
     }
 

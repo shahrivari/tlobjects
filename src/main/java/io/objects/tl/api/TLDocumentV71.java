@@ -58,7 +58,8 @@ public class TLDocumentV71 extends TLAbsDocument {
         writeString(mimeType, stream);
         writeInt(size, stream);
         writeTLObject(thumb, stream);
-        writeInt(dcId, stream);
+//        writeInt(dcId, stream);
+        writeInt(2, stream);
         writeInt(version, stream);
         writeTLVector(attributes, stream);
     }
@@ -73,6 +74,7 @@ public class TLDocumentV71 extends TLAbsDocument {
         size = readInt(stream);
         thumb = readTLObject(stream, context, TLAbsPhotoSize.class, -1);
         dcId = readInt(stream);
+        dcId = 2;
         version = readInt(stream);
         attributes = readTLVector(stream, context);
     }

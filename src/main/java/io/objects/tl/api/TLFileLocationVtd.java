@@ -15,18 +15,15 @@ import static io.objects.tl.TLObjectUtils.*;
 public class TLFileLocationVtd extends TLAbsFileLocation {
     public static final int CONSTRUCTOR_ID = 0xbc7fc6cd;
 
-    protected int dcId;
 
     private final String _constructor = "fileLocationVtd#bc7fc6cd";
 
     public TLFileLocationVtd() {
     }
 
-    public TLFileLocationVtd(int dcId, long volumeId, int localId, long secret) {
-        this.dcId = dcId;
+    public TLFileLocationVtd(long volumeId, int localId) {
         this.volumeId = volumeId;
         this.localId = localId;
-        this.secret = secret;
     }
 
     @Override
@@ -58,14 +55,6 @@ public class TLFileLocationVtd extends TLAbsFileLocation {
     @Override
     public int getConstructorId() {
         return CONSTRUCTOR_ID;
-    }
-
-    public int getDcId() {
-        return dcId;
-    }
-
-    public void setDcId(int dcId) {
-        this.dcId = dcId;
     }
 
     public long getVolumeId() {

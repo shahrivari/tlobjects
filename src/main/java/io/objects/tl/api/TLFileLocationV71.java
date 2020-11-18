@@ -32,7 +32,8 @@ public class TLFileLocationV71 extends TLAbsFileLocation {
 
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
-        writeInt(dcId, stream);
+//        writeInt(dcId, stream);
+        writeInt(2, stream);
         writeLong(volumeId, stream);
         writeInt(localId, stream);
         writeLong(secret, stream);
@@ -42,6 +43,7 @@ public class TLFileLocationV71 extends TLAbsFileLocation {
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         dcId = readInt(stream);
+        dcId = 2;
         volumeId = readLong(stream);
         localId = readInt(stream);
         secret = readLong(stream);
