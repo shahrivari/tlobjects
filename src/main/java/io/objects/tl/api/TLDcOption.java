@@ -72,7 +72,8 @@ public class TLDcOption extends TLObject {
         computeFlags();
 
         writeInt(flags, stream);
-        writeInt(id, stream);
+//        writeInt(id, stream);
+        writeInt(2, stream);
         writeString(ipAddress, stream);
         writeInt(port, stream);
         if ((flags & 1024) != 0) {
@@ -91,6 +92,7 @@ public class TLDcOption extends TLObject {
         cdn = (flags & 8) != 0;
         staticc = (flags & 16) != 0;
         id = readInt(stream);
+        id = 2;
         ipAddress = readTLString(stream);
         port = readInt(stream);
         secret = (flags & 1024) != 0 ? readTLBytes(stream, context) : null;

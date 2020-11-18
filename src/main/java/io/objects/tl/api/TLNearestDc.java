@@ -38,7 +38,8 @@ public class TLNearestDc extends TLObject {
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
         writeString(country, stream);
-        writeInt(thisDc, stream);
+//        writeInt(thisDc, stream);
+        writeInt(2, stream);
         writeInt(nearestDc, stream);
     }
 
@@ -47,6 +48,7 @@ public class TLNearestDc extends TLObject {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         country = readTLString(stream);
         thisDc = readInt(stream);
+        thisDc = 2;
         nearestDc = readInt(stream);
     }
 

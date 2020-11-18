@@ -36,7 +36,8 @@ public class TLChatPhotoVtd extends TLAbsChatPhoto {
     public void serializeBody(OutputStream stream) throws IOException {
         writeTLObject(photoSmall, stream);
         writeTLObject(photoBig, stream);
-        writeInt(dcId, stream);
+//        writeInt(dcId, stream);
+        writeInt(2, stream);
     }
 
     @Override
@@ -45,6 +46,7 @@ public class TLChatPhotoVtd extends TLAbsChatPhoto {
         photoSmall = readTLObject(stream, context, TLAbsFileLocation.class, -1);
         photoBig = readTLObject(stream, context, TLAbsFileLocation.class, -1);
         dcId = readInt(stream);
+        dcId = 2;
     }
 
     @Override

@@ -42,7 +42,8 @@ public class TLUserProfilePhotoVtd extends TLAbsUserProfilePhoto {
         writeLong(photoId, stream);
         writeTLObject(photoSmall, stream);
         writeTLObject(photoBig, stream);
-        writeInt(dcId, stream);
+//        writeInt(dcId, stream);
+        writeInt(2, stream);
     }
 
     @Override
@@ -52,6 +53,7 @@ public class TLUserProfilePhotoVtd extends TLAbsUserProfilePhoto {
         photoSmall = readTLObject(stream, context, TLAbsFileLocation.class, -1);
         photoBig = readTLObject(stream, context, TLAbsFileLocation.class, -1);
         dcId = readInt(stream);
+        dcId = 2;
     }
 
     @Override
