@@ -63,12 +63,12 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
         return CONSTRUCTOR_ID;
     }
 
-    public int getChannelId() {
+    public int getPeerId() {
         return peerId;
     }
 
-    public void setChannelId(int channelId) {
-        this.peerId = channelId;
+    public void setPeerId(int peerId) {
+        this.peerId = peerId;
     }
 
     public int getId() {

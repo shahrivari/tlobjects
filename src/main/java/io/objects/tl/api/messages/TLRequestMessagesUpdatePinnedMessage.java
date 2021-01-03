@@ -106,11 +106,11 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
         this.silent = silent;
     }
 
-    public TLAbsInputPeer getChannel() {
+    public TLAbsInputPeer getPeer() {
         return peer;
     }
 
-    public void setChannel(TLAbsInputPeer peer) {
+    public void setPeer(TLAbsInputPeer peer) {
         this.peer = peer;
     }
 
