@@ -28,9 +28,9 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     protected TLAbsInputPeer peer;
 
     protected int id;
-
+  
     protected boolean unpin;
-
+  
     private final String _constructor = "messages.updatePinnedMessage#a72ded50";
 
     public TLRequestMessagesUpdatePinnedMessage() {
@@ -138,4 +138,5 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     public void setUnpin(boolean unpin) {
         this.unpin = unpin;
     }
+
 }

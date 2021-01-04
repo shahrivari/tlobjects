@@ -17,7 +17,7 @@ import static io.objects.tl.TLObjectUtils.SIZE_INT32;
  */
 public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     public static final int CONSTRUCTOR_ID = 0x98592470;
-
+  
     protected int flags;
 
     protected int peerId;
@@ -27,12 +27,11 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     protected boolean silent;
 
     protected boolean unpin;
-
     private final String _constructor = "updateMessagesPinnedMessage#98592470";
 
     public TLUpdateMessagesPinnedMessage() {
     }
-
+  
     public TLUpdateMessagesPinnedMessage(int peerId, int id, boolean silent, boolean unpin) {
         this.peerId = peerId;
         this.id = id;
@@ -107,7 +106,6 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     public void setUnpin(boolean unpin) {
         this.unpin = unpin;
     }
-
     public int getId() {
         return id;
     }
