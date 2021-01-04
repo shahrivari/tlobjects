@@ -28,13 +28,16 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     protected TLAbsInputPeer peer;
 
     protected int id;
-
+  
+    protected boolean unpin;
+  
     private final String _constructor = "messages.updatePinnedMessage#a72ded50";
 
     public TLRequestMessagesUpdatePinnedMessage() {
     }
 
-    public TLRequestMessagesUpdatePinnedMessage(boolean silent, TLAbsInputPeer peer, int id) {
+    public TLRequestMessagesUpdatePinnedMessage(boolean silent, TLAbsInputPeer peer, int id, boolean unpin) {
+        this.unpin = unpin;
         this.silent = silent;
         this.peer = peer;
         this.id = id;
@@ -57,6 +60,7 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     private void computeFlags() {
         flags = 0;
         flags = silent ? (flags | 1) : (flags & ~1);
+        flags = unpin ? (flags | 2) : (flags & ~2);
     }
 
     @Override
@@ -73,6 +77,7 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         flags = readInt(stream);
         silent = (flags & 1) != 0;
+        unpin = (flags & 2) != 0;
         peer = readTLObject(stream, context, TLAbsInputPeer.class, -1);
         id = readInt(stream);
     }
@@ -121,4 +126,17 @@ public class TLRequestMessagesUpdatePinnedMessage extends TLMethod<TLAbsUpdates>
     public void setId(int id) {
         this.id = id;
     }
+
+    public boolean isSilent() {
+        return silent;
+    }
+
+    public boolean isUnpin() {
+        return unpin;
+    }
+
+    public void setUnpin(boolean unpin) {
+        this.unpin = unpin;
+    }
+
 }

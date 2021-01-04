@@ -17,23 +17,39 @@ import static io.objects.tl.TLObjectUtils.SIZE_INT32;
  */
 public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     public static final int CONSTRUCTOR_ID = 0x98592470;
+  
+    protected int flags;
 
     protected int peerId;
 
     protected int id;
 
+    protected boolean silent;
+
+    protected boolean unpin;
     private final String _constructor = "updateMessagesPinnedMessage#98592470";
 
     public TLUpdateMessagesPinnedMessage() {
     }
-
-    public TLUpdateMessagesPinnedMessage(int channelId, int id) {
-        this.peerId = channelId;
+  
+    public TLUpdateMessagesPinnedMessage(int peerId, int id, boolean silent, boolean unpin) {
+        this.peerId = peerId;
         this.id = id;
+        this.silent = silent;
+        this.unpin = unpin;
     }
+
+    private void computeFlags() {
+        flags = 0;
+        flags = silent ? (flags | 1) : (flags & ~1);
+        flags = unpin ? (flags | 2) : (flags & ~2);
+    }
+
 
     @Override
     public void serializeBody(OutputStream stream) throws IOException {
+        computeFlags();
+        writeInt(flags, stream);
         writeInt(peerId, stream);
         writeInt(id, stream);
     }
@@ -41,6 +57,9 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     @Override
     @SuppressWarnings({"unchecked", "SimplifiableConditionalExpression"})
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
+        flags = readInt(stream);
+        silent = (flags & 1) != 0;
+        unpin = (flags & 2) != 0;
         peerId = readInt(stream);
         id = readInt(stream);
     }
@@ -48,6 +67,7 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
     @Override
     public int computeSerializedSize() {
         int size = SIZE_CONSTRUCTOR_ID;
+        size += SIZE_INT32;
         size += SIZE_INT32;
         size += SIZE_INT32;
         return size;
@@ -71,6 +91,21 @@ public class TLUpdateMessagesPinnedMessage extends TLAbsUpdate {
         this.peerId = peerId;
     }
 
+    public boolean isSilent() {
+        return silent;
+    }
+
+    public void setSilent(boolean silent) {
+        this.silent = silent;
+    }
+
+    public boolean isUnpin() {
+        return unpin;
+    }
+
+    public void setUnpin(boolean unpin) {
+        this.unpin = unpin;
+    }
     public int getId() {
         return id;
     }
