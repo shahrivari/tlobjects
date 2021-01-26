@@ -49,7 +49,7 @@ public class TLChannelVtd extends TLAbsChat {
 
     protected String restrictionReason;
 
-    protected TLChannelAdminRights adminRights;
+    protected TLChannelAdminRightsVtd adminRights;
 
     protected TLChannelBannedRights bannedRights;
 
@@ -66,7 +66,7 @@ public class TLChannelVtd extends TLAbsChat {
                         boolean verified, boolean megagroup, boolean restricted,
                         boolean signatures, boolean min, int id, Long accessHash, String title, String username,
                         TLAbsChatPhoto photo, int date, int version, String restrictionReason,
-                        TLChannelAdminRights adminRights, TLChannelBannedRights bannedRights,
+                        TLChannelAdminRightsVtd adminRights, TLChannelBannedRights bannedRights,
                         Integer participantsCount) {
         this.creator = creator;
         this.left = left;
@@ -166,7 +166,7 @@ public class TLChannelVtd extends TLAbsChat {
         date = readInt(stream);
         version = readInt(stream);
         restrictionReason = (flags & 512) != 0 ? readTLString(stream) : null;
-        adminRights = (flags & 16384) != 0 ? (TLChannelAdminRights) readTLObject(stream, context) : null;
+        adminRights = (flags & 16384) != 0 ? (TLChannelAdminRightsVtd) readTLObject(stream, context) : null;
         bannedRights = (flags & 32768) != 0 ? readTLObject(stream, context, TLChannelBannedRights.class, TLChannelBannedRights.CONSTRUCTOR_ID) : null;
         participantsCount = (flags & 131072) != 0 ? readInt(stream) : null;
     }
@@ -347,11 +347,11 @@ public class TLChannelVtd extends TLAbsChat {
         this.restrictionReason = restrictionReason;
     }
 
-    public TLChannelAdminRights getAdminRights() {
+    public TLChannelAdminRightsVtd getAdminRights() {
         return adminRights;
     }
 
-    public void setAdminRights(TLChannelAdminRights adminRights) {
+    public void setAdminRights(TLChannelAdminRightsVtd adminRights) {
         this.adminRights = adminRights;
     }
 
