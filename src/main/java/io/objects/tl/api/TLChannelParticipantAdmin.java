@@ -27,7 +27,7 @@ public class TLChannelParticipantAdmin extends TLAbsChannelParticipant {
 
     protected int date;
 
-    protected TLChannelAdminRights adminRights;
+    protected TLAbsChannelAdminRights adminRights;
 
     private final String _constructor = "channelParticipantAdmin#a82fa898";
 
@@ -35,7 +35,7 @@ public class TLChannelParticipantAdmin extends TLAbsChannelParticipant {
     }
 
     public TLChannelParticipantAdmin(boolean canEdit, int userId, int inviterId, int promotedBy,
-            int date, TLChannelAdminRights adminRights) {
+            int date, TLAbsChannelAdminRights adminRights) {
         this.canEdit = canEdit;
         this.userId = userId;
         this.inviterId = inviterId;
@@ -70,7 +70,7 @@ public class TLChannelParticipantAdmin extends TLAbsChannelParticipant {
         inviterId = readInt(stream);
         promotedBy = readInt(stream);
         date = readInt(stream);
-        adminRights = readTLObject(stream, context, TLChannelAdminRights.class, TLChannelAdminRights.CONSTRUCTOR_ID);
+        adminRights = readTLObject(stream, context, TLAbsChannelAdminRights.class, -1);
     }
 
     @Override
@@ -137,11 +137,11 @@ public class TLChannelParticipantAdmin extends TLAbsChannelParticipant {
         this.date = date;
     }
 
-    public TLChannelAdminRights getAdminRights() {
+    public TLAbsChannelAdminRights getAdminRights() {
         return adminRights;
     }
 
-    public void setAdminRights(TLChannelAdminRights adminRights) {
+    public void setAdminRights(TLAbsChannelAdminRights adminRights) {
         this.adminRights = adminRights;
     }
 }
