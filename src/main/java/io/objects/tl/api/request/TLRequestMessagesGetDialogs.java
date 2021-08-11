@@ -25,6 +25,8 @@ public class TLRequestMessagesGetDialogs extends TLMethod<TLAbsDialogs> {
 
     protected boolean excludePinned;
 
+    protected boolean withoutMessages;
+
     protected int offsetDate;
 
     protected int offsetId;
@@ -67,6 +69,7 @@ public class TLRequestMessagesGetDialogs extends TLMethod<TLAbsDialogs> {
     private void computeFlags() {
         flags = 0;
         flags = excludePinned ? (flags | 1) : (flags & ~1);
+        flags = withoutMessages ? (flags | 2048) : (flags & ~2048);
     }
 
     @Override
@@ -86,6 +89,7 @@ public class TLRequestMessagesGetDialogs extends TLMethod<TLAbsDialogs> {
     public void deserializeBody(InputStream stream, TLContext context) throws IOException {
         flags = readInt(stream);
         excludePinned = (flags & 1) != 0;
+        withoutMessages = (flags & 2048) != 0;
         offsetDate = readInt(stream);
         offsetId = readInt(stream);
         offsetPeer = readTLObject(stream, context, TLAbsInputPeer.class, -1);
@@ -164,4 +168,13 @@ public class TLRequestMessagesGetDialogs extends TLMethod<TLAbsDialogs> {
     public void setHash(int hash) {
         this.hash = hash;
     }
+
+    public boolean isWithoutMessages() {
+        return withoutMessages;
+    }
+
+    public void setWithoutMessages(boolean withoutMessages) {
+        this.withoutMessages = withoutMessages;
+    }
+
 }
